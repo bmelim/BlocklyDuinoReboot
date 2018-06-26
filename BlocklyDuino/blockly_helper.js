@@ -27,7 +27,7 @@ function backup_blocks() {
 function restore_blocks() {
   if ('localStorage' in window && window.localStorage.arduino) {
     var xml = Blockly.Xml.textToDom(window.localStorage.arduino);
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+    Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
   }
 }
 
