@@ -1,9 +1,8 @@
 /**
- * @license
  * Visual Blocks Language
  *
  * Copyright 2012 Google Inc.
- * https://developers.google.com/blockly/
+ * http://code.google.com/p/blockly/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -89,7 +88,6 @@ var profile = {
 profile["default"] = profile["arduino"];
 //alert(profile.default.digital[0]);
 
-
 /**
  * Initialise the database of variable names.
  * @param {!Blockly.Workspace} workspace Workspace to generate code from.
@@ -99,32 +97,21 @@ Blockly.Arduino.init = function(workspace) {
   Blockly.Arduino.definitions_ = Object.create(null);
   // Create a dictionary of setups to be printed before the code.
   Blockly.Arduino.setups_ = Object.create(null);
-  // Create a dictionary mapping desired function names in definitions_
-  // to actual function names (to avoid collisions with user functions).
-  Blockly.Arduino.functionNames_ = Object.create(null);
 
 	if (!Blockly.Arduino.variableDB_) {
 		Blockly.Arduino.variableDB_ =
-			new Blockly.Names(Blockly.Arduino.RESERVED_WORDS_);
+				new Blockly.Names(Blockly.Arduino.RESERVED_WORDS_);
 	} else {
 		Blockly.Arduino.variableDB_.reset();
 	}
 
-	Blockly.Arduino.variableDB_.setVariableMap(workspace.getVariableMap());
-
 	var defvars = [];
-	// Add developer variables (not created or named by the user).
-	var devVarList = Blockly.Variables.allDeveloperVariables(workspace);
-	for (var i = 0; i < devVarList.length; i++) {
-		defvars.push('int ' + Blockly.Arduino.variableDB_.getName(devVarList[i], Blockly.Names.DEVELOPER_VARIABLE_TYPE) + ';\n');
+	var variables = Blockly.Variables.allVariables(workspace);
+	for (var x = 0; x < variables.length; x++) {
+		defvars[x] = 'int ' +
+				Blockly.Arduino.variableDB_.getName(variables[x],
+				Blockly.Variables.NAME_TYPE) + ';\n';
 	}
-		
-	// Add user variables, but only ones that are being used.	
-	var variables = Blockly.Variables.allUsedVarModels(workspace);
-	for (var i = 0; i < variables.length; i++) {
-		defvars.push(Blockly.Arduino.variableDB_.getName(variables[i].getId(), Blockly.Variables.NAME_TYPE));
-	}
-
 	Blockly.Arduino.definitions_['variables'] = defvars.join('\n');
 };
 
