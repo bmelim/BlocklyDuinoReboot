@@ -1,5 +1,6 @@
 /**
- * Blockly Demos: Code
+ * BlocklyDuino
+ * from Blockly Demos: Code
  *
  * Copyright 2012 Google Inc.
  * https://developers.google.com/blockly/
@@ -312,10 +313,7 @@ Code.renderContent = function() {
   } else if (content.id == 'content_dart') {
     Code.attemptCodeGeneration(Blockly.Dart, 'dart');
   } else if (content.id == 'content_arduino') {
-    //Code.attemptCodeGeneration(Blockly.Arduino, 'arduino');
-    var arduinoTextarea = document.getElementById('content_arduino');
-    arduinoTextarea.value = Code.attemptCodeGeneration(Blockly.Arduino, 'arduino');
-    arduinoTextarea.focus();
+    Code.attemptCodeGeneration(Blockly.Arduino, 'arduino');
   } else if (content.id == 'content_lua') {
     Code.attemptCodeGeneration(Blockly.Lua, 'lua');
   }
@@ -444,19 +442,6 @@ Code.init = function() {
 
   Code.bindClick('trashButton',
       function() {Code.discard(); Code.renderContent();});
-  Code.bindClick('runButton', Code.runJS);
-  // Disable the link button if page isn't backed by App Engine storage.
-  var linkButton = document.getElementById('linkButton');
-  if ('BlocklyStorage' in window) {
-    BlocklyStorage['HTTPREQUEST_ERROR'] = MSG['httpRequestError'];
-    BlocklyStorage['LINK_ALERT'] = MSG['linkAlert'];
-    BlocklyStorage['HASH_ERROR'] = MSG['hashError'];
-    BlocklyStorage['XML_ERROR'] = MSG['xmlError'];
-    Code.bindClick(linkButton,
-        function() {BlocklyStorage.link(Code.workspace);});
-  } else if (linkButton) {
-    linkButton.className = 'disabled';
-  }
 
   for (var i = 0; i < Code.TABS_.length; i++) {
     var name = Code.TABS_[i];
@@ -506,35 +491,34 @@ Code.initLanguage = function() {
   languageMenu.addEventListener('change', Code.changeLanguage, true);
 
   // Inject language strings.
-  document.title += ' ' + MSG['title'];
-  document.getElementById('title').textContent = MSG['title'];
   document.getElementById('tab_blocks').textContent = MSG['blocks'];
-
-  document.getElementById('linkButton').title = MSG['linkTooltip'];
-  document.getElementById('runButton').title = MSG['runTooltip'];
   document.getElementById('trashButton').title = MSG['trashTooltip'];
+  //change Blockly title span by this one
+  document.getElementById('title2').textContent = Blockly.Msg.TITLE2;
 };
 
 /**
  * Execute the user's code.
  * Just a quick and dirty eval.  Catch infinite loops.
  */
-Code.runJS = function() {
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = '  checkTimeout();\n';
-  var timeouts = 0;
-  var checkTimeout = function() {
-    if (timeouts++ > 1000000) {
-      throw MSG['timeout'];
-    }
-  };
-  var code = Blockly.JavaScript.workspaceToCode(Code.workspace);
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-  try {
-    eval(code);
-  } catch (e) {
-    alert(MSG['badCode'].replace('%1', e));
-  }
-};
+//not used by BlocklyDuino
+ 
+// Code.runJS = function() {
+  // Blockly.JavaScript.INFINITE_LOOP_TRAP = '  checkTimeout();\n';
+  // var timeouts = 0;
+  // var checkTimeout = function() {
+    // if (timeouts++ > 1000000) {
+      // throw MSG['timeout'];
+    // }
+  // };
+  // var code = Blockly.JavaScript.workspaceToCode(Code.workspace);
+  // Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+  // try {
+    // eval(code);
+  // } catch (e) {
+    // alert(MSG['badCode'].replace('%1', e));
+  // }
+// };
 
 /**
  * Discard all blocks from the workspace.
@@ -551,8 +535,11 @@ Code.discard = function() {
 };
 
 // Load the Code demo's language strings.
-document.write('<script src="msg/' + Code.LANG + '.js"></script>\n');
+document.write('<script src="msg/js/' + Code.LANG + '.js"></script>\n');
 // Load Blockly's language strings.
 document.write('<script src="../msg/js/' + Code.LANG + '.js"></script>\n');
+
+// Load BlocklyDuino's language strings.
+document.write('<script src="msg/js/' + Code.LANG + '_BD.js"></script>\n');
 
 window.addEventListener('load', Code.init);

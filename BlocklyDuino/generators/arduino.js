@@ -21,6 +21,7 @@
 /**
  * @fileoverview Helper functions for generating Arduino for blocks.
  * @author gasolin@gmail.com (Fred Lin)
+ * @reboot scanet@libreduc.cc (SebCanet)
  */
 'use strict';
 
@@ -68,6 +69,36 @@ Blockly.Arduino.ORDER_CONDITIONAL = 13;   // expr ? expr : expr
 Blockly.Arduino.ORDER_ASSIGNMENT = 14;    // = *= /= ~/= %= += -= <<= >>= &= ^= |=
 Blockly.Arduino.ORDER_NONE = 99;          // (...)
 
+/**
+ * List of outer-inner pairings that do NOT require parentheses.
+ * @type {!Array.<!Array.<number>>}
+ */
+Blockly.Arduino.ORDER_OVERRIDES = [
+  // (foo()).bar -> foo().bar
+  // (foo())[0] -> foo()[0]
+  [Blockly.Arduino.ORDER_FUNCTION_CALL, Blockly.Arduino.ORDER_MEMBER],
+  // (foo())() -> foo()()
+  [Blockly.Arduino.ORDER_FUNCTION_CALL, Blockly.Arduino.ORDER_FUNCTION_CALL],
+  // (foo.bar).baz -> foo.bar.baz
+  // (foo.bar)[0] -> foo.bar[0]
+  // (foo[0]).bar -> foo[0].bar
+  // (foo[0])[1] -> foo[0][1]
+  [Blockly.Arduino.ORDER_MEMBER, Blockly.Arduino.ORDER_MEMBER],
+  // (foo.bar)() -> foo.bar()
+  // (foo[0])() -> foo[0]()
+  [Blockly.Arduino.ORDER_MEMBER, Blockly.Arduino.ORDER_FUNCTION_CALL],
+  // !(!foo) -> !!foo
+  [Blockly.Arduino.ORDER_LOGICAL_NOT, Blockly.Arduino.ORDER_LOGICAL_NOT],
+  // a * (b * c) -> a * b * c
+  [Blockly.Arduino.ORDER_MULTIPLICATION, Blockly.Arduino.ORDER_MULTIPLICATION],
+  // a + (b + c) -> a + b + c
+  [Blockly.Arduino.ORDER_ADDITION, Blockly.Arduino.ORDER_ADDITION],
+  // a && (b && c) -> a && b && c
+  [Blockly.Arduino.ORDER_LOGICAL_AND, Blockly.Arduino.ORDER_LOGICAL_AND],
+  // a || (b || c) -> a || b || c
+  [Blockly.Arduino.ORDER_LOGICAL_OR, Blockly.Arduino.ORDER_LOGICAL_OR]
+];
+
 /*
  * Arduino Board profiles
  *
@@ -95,13 +126,13 @@ profile["default"] = profile["arduino"];
  * @param {!Blockly.Workspace} workspace Workspace to generate code from.
  */
 Blockly.Arduino.init = function(workspace) {
-  // Create a dictionary of definitions to be printed before setups.
-  Blockly.Arduino.definitions_ = Object.create(null);
-  // Create a dictionary of setups to be printed before the code.
-  Blockly.Arduino.setups_ = Object.create(null);
-  // Create a dictionary mapping desired function names in definitions_
-  // to actual function names (to avoid collisions with user functions).
-  Blockly.Arduino.functionNames_ = Object.create(null);
+	// Create a dictionary of definitions to be printed before setups.
+	Blockly.Arduino.definitions_ = Object.create(null);
+	// Create a dictionary of setups to be printed before the code.
+	Blockly.Arduino.setups_ = Object.create(null);
+	// Create a dictionary mapping desired function names in definitions_
+	// to actual function names (to avoid collisions with user functions).
+	Blockly.Arduino.functionNames_ = Object.create(null);
 
 	if (!Blockly.Arduino.variableDB_) {
 		Blockly.Arduino.variableDB_ =
@@ -126,6 +157,12 @@ Blockly.Arduino.init = function(workspace) {
 	}
 
 	Blockly.Arduino.definitions_['variables'] = defvars.join('\n');
+
+	// Declare all of the variables.
+	if (defvars.length) {
+	Blockly.Arduino.definitions_['variables'] =
+		'int ' + defvars.join(', ') + ';\n';
+	}
 };
 
 /**
@@ -156,8 +193,12 @@ Blockly.Arduino.finish = function(code) {
   for (var name in Blockly.Arduino.setups_) {
     setups.push(Blockly.Arduino.setups_[name]);
   }
+  // Clean up temporary data.
+  delete Blockly.Arduino.definitions_;
+  delete Blockly.Arduino.functionNames_;
+  Blockly.Arduino.variableDB_.reset();
 
-  var allDefs = imports.join('\n') + '\n\n' + definitions.join('\n') + '\nvoid setup() \n{\n  '+setups.join('\n  ') + '\n}'+ '\n\n';
+  var allDefs = imports.join('\n') + '\n\n' + definitions.join('\n') + '\nvoid setup() \n{\n  ' + setups.join('\n  ') + '\n}'+ '\n\n';
   return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
 };
 
