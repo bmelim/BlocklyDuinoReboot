@@ -148,15 +148,15 @@ Blockly.Blocks['grove_serial_lcd_print'] = {
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/Serial%20LCD.jpg", 64, 64))
         .appendField("PIN#")
         .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
-    this.appendValueInput("TEXT", 'String')
+    this.appendValueInput("TEXT1")
         .setCheck('String')
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("print line1");
-    this.appendValueInput("TEXT2", 'String')
+    this.appendValueInput("TEXT2")
         .setCheck('String')
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("print line2")
-    this.appendValueInput("DELAY_TIME", 'Number')
+    this.appendValueInput("DELAY_TIME")
         .setCheck('Number')
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("Delay");

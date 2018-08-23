@@ -187,7 +187,7 @@ var _get_next_pin = function(dropdown_pin) {
 
 Blockly.Arduino.grove_serial_lcd_print = function() {
   var dropdown_pin = this.getFieldValue('PIN');
-  var text = Blockly.Arduino.valueToCode(this, 'TEXT',
+  var text = Blockly.Arduino.valueToCode(this, 'TEXT1',
       Blockly.Arduino.ORDER_UNARY_POSTFIX) || '\'\'';
   var text2 = Blockly.Arduino.valueToCode(this, 'TEXT2',
       Blockly.Arduino.ORDER_UNARY_POSTFIX) || '\'\'';

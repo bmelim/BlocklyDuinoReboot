@@ -8,25 +8,35 @@
   <script src="../appengine/storage.js"></script>
   <script src="../blockly_compressed.js"></script>
   <script src="../blocks_compressed.js"></script>
+  
   <script src="../javascript_compressed.js"></script>
   <script src="../python_compressed.js"></script>
   <script src="../php_compressed.js"></script>
   <script src="../lua_compressed.js"></script>
   <script src="../dart_compressed.js"></script>
-  <!-- BlocklyDuino specific -->
-  <script src="BlocklyDuino.js"></script>
-  <script src="generators/arduino.js"></script>
-  <script src="generators/arduino/colour.js"></script>
-  <script src="generators/arduino/lists.js"></script>
-  <script src="generators/arduino/logic.js"></script>
-  <script src="generators/arduino/loops.js"></script>
-  <script src="generators/arduino/math.js"></script>
-  <script src="generators/arduino/procedures.js"></script>
-  <script src="generators/arduino/text.js"></script>
-  <script src="generators/arduino/variables.js"></script>
-  <script src="generators/arduino/variables_dynamic.js"></script>
-  
-  <script src="generators/arduino/addon/grove.js"></script>
+  <!-- BlocklyDuino specific, order is important -->
+  <script src="BlocklyDuino_code.js"></script>
+  <script src="BlocklyDuino_helper.js"></script>
+  <script src="Blob.js"></script>
+  <script src="spin.js"></script>
+  <script src="FileSaver.min.js"></script>
+	<!-- BlocklyDuino specific: block design -->
+	<script src="blocks/arduino_base.js"></script>
+	<script src="blocks/grove.js"></script>
+	<!-- BlocklyDuino specific: common generator code -->
+	<script src="generators/arduino.js"></script>
+	<script src="generators/arduino/colour.js"></script>
+	<script src="generators/arduino/lists.js"></script>
+	<script src="generators/arduino/logic.js"></script>
+	<script src="generators/arduino/loops.js"></script>
+	<script src="generators/arduino/math.js"></script>
+	<script src="generators/arduino/procedures.js"></script>
+	<script src="generators/arduino/text.js"></script>
+	<script src="generators/arduino/variables.js"></script>
+	<script src="generators/arduino/variables_dynamic.js"></script>
+	<!-- BlocklyDuino specific: addon generator code -->	 
+	<script src="generators/arduino/addon/arduino_base.js"></script>
+	<script src="generators/arduino/addon/grove.js"></script>
   <!-- BlocklyDuino specific -->
 </head>
 <body>
@@ -59,13 +69,19 @@
             <td class="tabmin">&nbsp;</td>
 			<!-- BlocklyDuino specific -->			
             <td id="tab_arduino" class="taboff">Arduino</td>
-            <td class="tabmin">&nbsp;</td>			
+            <td class="tabmin">&nbsp;</td>
 			<!-- BlocklyDuino specific -->
             <td id="tab_xml" class="taboff">XML</td>
             <td class="tabmax">
+              <button id="uploadButton">Upload</button>
+              <button id="resetButton">Reset card</button>
               <button id="trashButton" class="notext" title="...">
                 <img src='../media/1x1.gif' class="trash icon21">
               </button>
+              <button id="saveCodeButton">Save Arduino Code</button>
+              <button id="saveXMLButton">Save XML</button>
+              <button id="loadXMLfakeButton">Load XML</button>
+              <input type="file" id="loadXMLaction" style="display: none;"/>
               <!-- <button id="linkButton" class="notext" title="..."> -->
                 <!-- <img src='../media/1x1.gif' class="link icon21"> -->
               <!-- </button> -->
@@ -387,7 +403,88 @@
     </category>
     <sep></sep>
     <category name="%{BKY_CATVARIABLES}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
-    <category name="%{BKY_CATFUNCTIONS}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
+    <category name="%{BKY_CATFUNCTIONS}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>	
+    <sep></sep>
+    <category name="Input / Output">
+      <block type="arduino_base_inout_highlow"></block>
+      <block type="arduino_base_inout_digital_write"></block>
+      <block type="arduino_base_inout_digital_read"></block>
+      <block type="arduino_base_inout_analog_write">
+        <value name="PWM">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="arduino_base_inout_analog_read"></block>
+      <block type="arduino_base_serial_print">
+        <value name="CONTENT">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="arduino_base_inout_tone">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">440</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="arduino_base_inout_notone"></block>
+      <block type="arduino_base_inout_buildin_led"></block>
+    </category>
+    <category name="Servo">
+      <block type="arduino_base_servo_move">
+        <value name="DEGREE">
+          <shadow type="math_number">
+            <field name="NUM">1000</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="arduino_base_servo_read_degrees"></block>
+    </category>
+    <category name="Grove">
+      <block type="grove_led"></block>
+      <block type="grove_button"></block>
+      <block type="grove_relay"></block>
+      <block type="grove_tilt_switch"></block>
+      <block type="grove_piezo_buzzer"></block>
+      <block type="grove_pir_motion_sensor"></block>
+      <block type="grove_line_finder"></block>
+      <block type="grove_rgb_led"></block>
+      <block type="grove_ultrasonic_ranger"></block>
+    </category>
+    <category name="Grove Analog">
+      <block type="grove_rotary_angle"></block>
+      <block type="grove_temporature_sensor"></block>
+      <block type="grove_sound_sensor"></block>
+      <block type="grove_thumb_joystick"></block>
+    </category>
+    <category name="Grove LCD">
+      <block type="grove_serial_lcd_print">
+        <value name="TEXT1">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+        <value name="TEXT2">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+        <value name="DELAY_TIME">
+          <shadow type="math_number">
+            <field name="NUM">1000</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="grove_serial_lcd_power"></block>
+      <block type="grove_serial_lcd_effect"></block>
+    </category>
+    <category name="Grove Motor">
+      <block type="grove_motor_shield"></block>
+    </category>
   </xml>
 </body>
 </html>

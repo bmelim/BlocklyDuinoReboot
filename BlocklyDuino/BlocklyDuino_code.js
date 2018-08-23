@@ -440,8 +440,18 @@ Code.init = function() {
 
   Code.tabClick(Code.selected);
 
+  Code.bindClick('uploadButton',
+      function() {Code.uploadClick();});
+  Code.bindClick('resetButton',
+      function() {Code.resetClick();});
   Code.bindClick('trashButton',
       function() {Code.discard(); Code.renderContent();});
+  Code.bindClick('saveCodeButton',
+      function() {Code.saveCode();});
+  Code.bindClick('saveXMLButton',
+      function() {Code.saveXML();});
+  Code.bindClick('loadXMLfakeButton',
+      function() {Code.loadXML();});
 
   for (var i = 0; i < Code.TABS_.length; i++) {
     var name = Code.TABS_[i];
