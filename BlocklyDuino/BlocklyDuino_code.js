@@ -414,18 +414,28 @@ Code.init = function() {
   var toolboxXml = Blockly.Xml.textToDom(toolboxText);
 
   Code.workspace = Blockly.inject('content_blocks',
-      {grid:
+		{
+		grid:
           {spacing: 25,
            length: 3,
            colour: '#ccc',
-           snap: true},
-       media: '../../media/',
-       rtl: rtl,
-       toolbox: toolboxXml,
-       zoom:
+           snap: true
+		   },
+		media: '../media/',
+		sounds: true,
+		rtl: rtl,
+		toolbox: toolboxXml,
+		trashcan: true,
+		zoom:
            {controls: true,
-            wheel: true}
-      });
+            wheel: true,
+			startScale: 1.0,
+			maxScale: 3,
+			minScale: 0.3,
+			scaleSpeed: 1.2
+			},
+		}
+	);
 
   // Add to reserved word list: Local variables in execution environment (runJS)
   // and the infinite loop detection function.

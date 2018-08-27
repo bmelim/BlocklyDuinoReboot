@@ -27,127 +27,133 @@
  * @author gasolin@gmail.com (Fred Lin)
  */
 
-goog.provide('Blockly.Blocks.grove');
+goog.provide('Blockly.Constants.grove');
 
 goog.require('Blockly.Blocks');
-
+goog.require('Blockly');
 
 Blockly.Blocks['grove_led'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#LED',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
         .appendField("LED")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/groveblue%20white.jpg", 64, 64))
         .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN")
         .appendField("stat")
         .appendField(new Blockly.FieldDropdown([["HIGH", "HIGH"], ["LOW", "LOW"]]), "STAT");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('green LED');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#LED');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_button'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Button',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
         .appendField("Button")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/bgpushb1.jpg", 64, 64))
         .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.setOutput(true, 'Boolean');
     this.setTooltip('Basic digital input');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Button');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_rotary_angle'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Potentiometer',
   init: function() {
     this.setColour(10);
     this.appendDummyInput()
         .appendField("Rotary Angle")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/GroveRotaryP.jpg", 64, 64))
         .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.analog), "PIN");
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownAnalog), "PIN");
     this.setOutput(true, 'Number');
     this.setTooltip('Analog output between 0 and Vcc');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Potentiometer');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_tilt_switch'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Tilt_switch',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
         .appendField("Tilt Switch")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/gbtlt.jpg", 64, 64))
         .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.setOutput(true, 'Boolean');
     this.setTooltip('When the switch is level it is open, and when tilted, the switch closes.');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Tilt_switch');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_piezo_buzzer'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/GROVE_-_Starter_Kit_V1.1b#Grove_.E2.80.93_Buzzer',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
         .appendField("Piezo Buzzer")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/107020000%201.jpg", 64, 64))
         .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN")
         .appendField("stat")
         .appendField(new Blockly.FieldDropdown([["HIGH", "HIGH"], ["LOW", "LOW"]]), "STAT");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Emit a tone when the output is high');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/GROVE_-_Starter_Kit_V1.1b#Grove_.E2.80.93_Buzzer');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_relay'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/Grove_-_Relay',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
         .appendField("Relay")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/1030200051.jpg", 64, 64))
         .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN")
         .appendField("stat")
         .appendField(new Blockly.FieldDropdown([["HIGH", "HIGH"], ["LOW", "LOW"]]), "STAT");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('capable of switching a much higher voltages and currents. The maximum voltage and current that can be controlled by this module upto 250V at 10 amps.');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_Relay');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_temporature_sensor'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/Project_Seven_-_Temperature',
   init: function() {
     this.setColour(10);
     this.appendDummyInput()
         .appendField("Temporature Sensor")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/101020015%201.jpg", 64, 64))
         .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.analog), "PIN")
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownAnalog), "PIN")
     this.setOutput(true, 'Number');
     this.setTooltip('return number of ambient temperature in ℃');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/Project_Seven_-_Temperature');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_serial_lcd_print'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Serial_LCD',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
         .appendField("Serial LCD")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/Serial%20LCD.jpg", 64, 64))
         .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.appendValueInput("TEXT1")
         .setCheck('String')
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -163,19 +169,20 @@ Blockly.Blocks['grove_serial_lcd_print'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('print text on an 16 character by 2 line LCD.');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Serial_LCD');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 //grove lcd power on/off
 Blockly.Blocks['grove_serial_lcd_power'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#LED',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
         .appendField("Serial LCD")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/Serial%20LCD.jpg", 64, 64))
         .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("Power")
@@ -183,19 +190,20 @@ Blockly.Blocks['grove_serial_lcd_power'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Turn LCD power on/off');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#LED');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 //scroll left/right/no scroll/blink/noblink
 Blockly.Blocks['grove_serial_lcd_effect'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#LED',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
         .appendField("Serial LCD")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/Serial%20LCD.jpg", 64, 64))
         .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("Effect")
@@ -203,69 +211,74 @@ Blockly.Blocks['grove_serial_lcd_effect'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Turn LCD power on/off');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#LED');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_sound_sensor'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/Grove_-_Sound_Sensor',
   init: function() {
     this.setColour(10);
     this.appendDummyInput()
         .appendField("Sound Sensor")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/seeed/img/2017-02/fhpNt4QmMYZRtWvB40LIiMrw.jpg", 64, 64))
         .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.analog), "PIN")
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownAnalog), "PIN")
     this.setOutput(true, 'Number');
     this.setTooltip('Detect the sound strength of the environment');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_Sound_Sensor');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_pir_motion_sensor'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/Grove_-_PIR_Motion_Sensor',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
         .appendField("PIR Motion Sensor")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/Grove%20-%20PIR%20Motion%20Sensor.jpg", 64, 64))
         .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN")
     this.setOutput(true, 'Number');
     this.setTooltip('When anyone moves in it\'s detecting range, the sensor outputs HIGH.');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_PIR_Motion_Sensor');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_line_finder'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/Grove_-_Line_Finder',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
         .appendField("Line Finder")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/seeed/img/2016-09/WcjECS8Y4O8dSFI1TxymsAtg.jpg", 64, 64))
 	      .appendField("PIN#")
-	      .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+	      .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.setOutput(true, 'Boolean');
     this.setTooltip('Output digital signal so the robot can reliably follow a black line on a white background');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_Line_Finder');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_ultrasonic_ranger'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/Grove_-_Ultrasonic_Ranger',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
 	      .appendField("Ultrasonic Ranger")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/seeed/img/2016-09/kIyY21sbC6ct7JYzCWf1mAPs.jpg", 64, 64))
 	      .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN")
         .appendField("unit")
         .appendField(new Blockly.FieldDropdown([["cm", "cm"],  ["inch", "inch"]]), "UNIT");
     this.setOutput(true, 'Number');
     this.setTooltip('Non-contact distance measurement module');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_Ultrasonic_Ranger');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_motor_shield'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/Motor_Shield',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
@@ -279,34 +292,36 @@ Blockly.Blocks['grove_motor_shield'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Drive two brushed DC motors');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/Motor_Shield');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_thumb_joystick'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/Grove_-_Thumb_Joystick',
   init: function() {
     this.setColour(10);
     this.appendDummyInput()
 	.appendField("Thumb Joystick")
         .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/bgjoy1.jpg", 64, 64))
 	.appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.analog), "PIN")
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownAnalog), "PIN")
         .appendField("axis")
         .appendField(new Blockly.FieldDropdown([["x", "x"],  ["y", "y"]]), "AXIS");
     this.setOutput(true, 'Number');
-this.setTooltip('output two analog values(200~800) representing two directions');
+	this.setTooltip('output two analog values(200~800) representing two directions');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_Thumb_Joystick');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 
 Blockly.Blocks['grove_rgb_led'] = {
-  helpUrl: 'http://www.seeedstudio.com/wiki/index.php?title=Twig_-_Chainable_RGB_LED',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
   .appendField("Chainable RGB LED")
         .appendField(new Blockly.FieldImage("http://www.seeedstudio.com/depot/images/product/chanbalelednb1.jpg", 64, 64))
   .appendField("PIN#")
-        .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+        .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN")
     this.appendDummyInput("COLOR0")
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField("Color 1")
@@ -316,6 +331,8 @@ Blockly.Blocks['grove_rgb_led'] = {
     this.setNextStatement(true, null);
     this.setTooltip('256 color LED, currently Chainable feature is not support');
     this.itemCount_ = 1;
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=Twig_-_Chainable_RGB_LED');
+    this.setColour('%{BKY_GROVE_HUE}');
   },
   mutationToDom: function() {
     var container = document.createElement('mutation');
@@ -451,15 +468,13 @@ Blockly.Blocks['grove_rgb_led_item'] = {
 };
 
 Blockly.Blocks['grove_bluetooth_slave'] = {
-  category: 'Network',
-  helpUrl: 'http://www.seeedstudio.com/wiki/Grove_-_Serial_Bluetooth',
   init: function() {
     this.setColour(190);
     this.appendDummyInput()
       .appendField("Bluetooth Slave")
       .appendField(new Blockly.FieldImage("http://www.seeedstudio.com/wiki/File:Twigbt00.jpg", 64, 64))
       .appendField("PIN#")
-      .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+      .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN")
     this.appendDummyInput()
       .setAlign(Blockly.ALIGN_RIGHT)
       .appendField("Name")
@@ -477,6 +492,8 @@ Blockly.Blocks['grove_bluetooth_slave'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Bluetooth V2.0+EDR slave. Support single slave per board');
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_Serial_Bluetooth');
+    this.setColour('%{BKY_GROVE_HUE}');
   }
 };
 //http://www.seeedstudio.com/wiki/File:Twig-Temp%26Humi.jpg
