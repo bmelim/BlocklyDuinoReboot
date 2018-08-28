@@ -40,7 +40,7 @@ Blockly.Blocks['arduino_base_base_delay'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Delay specific time');
-    this.setHelpUrl('http://arduino.cc/en/Reference/delay');
+    this.setHelpUrl('https://www.arduino.cc/reference/en/language/functions/time/delay/');
     this.setColour('%{BKY_ARDUINO_BASE_HUE}');
   }
 };
@@ -58,7 +58,7 @@ Blockly.Blocks['arduino_base_base_map'] = {
     this.setInputsInline(true);
     this.setOutput(true);
     this.setTooltip('Re-maps a number from [0-1024] to another.');
-    this.setHelpUrl('http://arduino.cc/en/Reference/map');
+    this.setHelpUrl('https://www.arduino.cc/reference/en/language/functions/math/map/');
     this.setColour('%{BKY_ARDUINO_BASE_HUE}');
   }
 };
@@ -71,7 +71,7 @@ Blockly.Blocks['arduino_base_inout_buildin_led'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('light or off the build-in LED');
-    this.setHelpUrl('http://arduino.cc/en/Reference/DigitalWrite');
+    this.setHelpUrl('https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/');
     this.setColour('%{BKY_ARDUINO_BASE_HUE}');
    }
 };
@@ -86,7 +86,7 @@ Blockly.Blocks['arduino_base_inout_digital_write'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Write digital value to a specific Port');
-    this.setHelpUrl('http://arduino.cc/en/Reference/DigitalWrite');
+    this.setHelpUrl('https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/');
     this.setColour('%{BKY_ARDUINO_BASE_HUE}');
   }
 };
@@ -98,7 +98,7 @@ Blockly.Blocks['arduino_base_inout_digital_read'] = {
 	    .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.setOutput(true, 'Boolean');
     this.setTooltip('');
-    this.setHelpUrl('http://arduino.cc/en/Reference/DigitalRead');
+    this.setHelpUrl('https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/');
     this.setColour('%{BKY_ARDUINO_BASE_HUE}');
   }
 };
@@ -115,7 +115,7 @@ Blockly.Blocks['arduino_base_inout_analog_write'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Write analog value between 0 and 255 to a specific Port');
-    this.setHelpUrl('http://arduino.cc/en/Reference/AnalogWrite');
+    this.setHelpUrl('https://www.arduino.cc/reference/en/language/functions/analog-io/analogwrite/');
     this.setColour('%{BKY_ARDUINO_BASE_HUE}');
   }
 };
@@ -127,7 +127,7 @@ Blockly.Blocks['arduino_base_inout_analog_read'] = {
         .appendField(new Blockly.FieldDropdown(profile.default.dropdownAnalog), "PIN");
     this.setOutput(true, 'Number');
     this.setTooltip('Return value between 0 and 1024');
-    this.setHelpUrl('http://arduino.cc/en/Reference/AnalogRead');
+    this.setHelpUrl('https://www.arduino.cc/reference/en/language/functions/analog-io/analogread/');
     this.setColour('%{BKY_ARDUINO_BASE_HUE}');
   }
 };
@@ -144,7 +144,7 @@ Blockly.Blocks['arduino_base_inout_tone'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip("Generate audio tones on a pin");
-    this.setHelpUrl('http://www.arduino.cc/en/Reference/Tone');
+    this.setHelpUrl('https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/');
     this.setColour('%{BKY_ARDUINO_BASE_HUE}');
   }
 };
@@ -158,7 +158,7 @@ Blockly.Blocks['arduino_base_inout_notone'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip("Stop generating a tone on a pin");
-    this.setHelpUrl('http://www.arduino.cc/en/Reference/NoTone');
+    this.setHelpUrl('https://www.arduino.cc/reference/en/language/functions/advanced-io/notone/');
     this.setColour('%{BKY_ARDUINO_BASE_HUE}');
   }
 };
@@ -169,7 +169,7 @@ Blockly.Blocks['arduino_base_inout_highlow'] = {
         .appendField(new Blockly.FieldDropdown([["HIGH", "HIGH"], ["LOW", "LOW"]]), 'BOOL')
     this.setOutput(true, 'Boolean');
     this.setTooltip('');
-    this.setHelpUrl('http://arduino.cc/en/Reference/Constants');
+    this.setHelpUrl('https://www.arduino.cc/reference/en/language/variables/constants/constants/');
     this.setColour('%{BKY_ARDUINO_BASE_HUE}');
   }
 };
@@ -181,7 +181,7 @@ Blockly.Blocks['arduino_base_serial_print'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Prints data to the console/serial port as human-readable ASCII text.');
-    this.setHelpUrl('http://www.arduino.cc/en/Serial/Print');
+    this.setHelpUrl('https://www.arduino.cc/en/Serial/Print');
     this.setColour('%{BKY_ARDUINO_BASE_HUE}');
   }
 };

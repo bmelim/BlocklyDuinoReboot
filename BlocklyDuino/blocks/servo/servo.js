@@ -34,7 +34,7 @@ Blockly.Blocks['servo_move'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Servo")
-        .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/EMAX%20Servo.jpg", 64, 64))
+        .appendField(new Blockly.FieldImage("./blocks/servo/EMAX_Servo.jpg", 64, 64))
         .appendField("PIN#")
         .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.appendValueInput("DEGREE")
@@ -44,7 +44,7 @@ Blockly.Blocks['servo_move'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('move between 0~180 degree');
-    this.setHelpUrl('http://www.arduino.cc/playground/ComponentLib/servo');
+    this.setHelpUrl('http://playground.arduino.cc/ComponentLib/servo');
     this.setColour('%{BKY_SERVO_HUE}');
   }
 };
@@ -53,7 +53,7 @@ Blockly.Blocks['servo_read_degrees'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Servo")
-        .appendField(new Blockly.FieldImage("https://statics3.seeedstudio.com/images/product/EMAX%20Servo.jpg", 64, 64))
+        .appendField(new Blockly.FieldImage("./blocks/servo/EMAX_Servo.jpg", 64, 64))
         .appendField("PIN#")
         .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.appendDummyInput()
@@ -61,7 +61,7 @@ Blockly.Blocks['servo_read_degrees'] = {
         .appendField("Read Degrees")
     this.setOutput(true, 'Number');
     this.setTooltip('return that degree with the last servo move.');
-    this.setHelpUrl('http://www.arduino.cc/playground/ComponentLib/servo');
+    this.setHelpUrl('http://playground.arduino.cc/ComponentLib/servo');
     this.setColour('%{BKY_SERVO_HUE}');
   }
 };

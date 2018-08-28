@@ -45,7 +45,7 @@ Blockly.Blocks['grove_led'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('green LED');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#LED');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Red_LED/')
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -60,7 +60,7 @@ Blockly.Blocks['grove_button'] = {
         .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.setOutput(true, 'Boolean');
     this.setTooltip('Basic digital input');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Button');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Button/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -75,7 +75,7 @@ Blockly.Blocks['grove_rotary_angle'] = {
         .appendField(new Blockly.FieldDropdown(profile.default.dropdownAnalog), "PIN");
     this.setOutput(true, 'Number');
     this.setTooltip('Analog output between 0 and Vcc');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Potentiometer');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Rotary_Angle_Sensor/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -90,7 +90,7 @@ Blockly.Blocks['grove_tilt_switch'] = {
         .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.setOutput(true, 'Boolean');
     this.setTooltip('When the switch is level it is open, and when tilted, the switch closes.');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Tilt_switch');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Tilt_Switch/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -108,7 +108,7 @@ Blockly.Blocks['grove_piezo_buzzer'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Emit a tone when the output is high');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/GROVE_-_Starter_Kit_V1.1b#Grove_.E2.80.93_Buzzer');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Buzzer/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -126,7 +126,7 @@ Blockly.Blocks['grove_relay'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('capable of switching a much higher voltages and currents. The maximum voltage and current that can be controlled by this module upto 250V at 10 amps.');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_Relay');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Relay/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -141,7 +141,7 @@ Blockly.Blocks['grove_temporature_sensor'] = {
         .appendField(new Blockly.FieldDropdown(profile.default.dropdownAnalog), "PIN")
     this.setOutput(true, 'Number');
     this.setTooltip('return number of ambient temperature in ℃');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/Project_Seven_-_Temperature');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Temperature_Sensor/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -169,7 +169,7 @@ Blockly.Blocks['grove_serial_lcd_print'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('print text on an 16 character by 2 line LCD.');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#Serial_LCD');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Serial_LCD_V1.0/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -190,7 +190,7 @@ Blockly.Blocks['grove_serial_lcd_power'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Turn LCD power on/off');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#LED');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Serial_LCD_V1.0/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -211,7 +211,7 @@ Blockly.Blocks['grove_serial_lcd_effect'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Turn LCD power on/off');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=GROVE_-_Starter_Bundle_V1.0b#LED');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Serial_LCD_V1.0/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -226,7 +226,7 @@ Blockly.Blocks['grove_sound_sensor'] = {
         .appendField(new Blockly.FieldDropdown(profile.default.dropdownAnalog), "PIN")
     this.setOutput(true, 'Number');
     this.setTooltip('Detect the sound strength of the environment');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_Sound_Sensor');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Sound_Sensor/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -241,7 +241,7 @@ Blockly.Blocks['grove_pir_motion_sensor'] = {
         .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN")
     this.setOutput(true, 'Number');
     this.setTooltip('When anyone moves in it\'s detecting range, the sensor outputs HIGH.');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_PIR_Motion_Sensor');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-PIR_Motion_Sensor/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -256,7 +256,7 @@ Blockly.Blocks['grove_line_finder'] = {
 	      .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.setOutput(true, 'Boolean');
     this.setTooltip('Output digital signal so the robot can reliably follow a black line on a white background');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_Line_Finder');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Line_Finder/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -273,7 +273,7 @@ Blockly.Blocks['grove_ultrasonic_ranger'] = {
         .appendField(new Blockly.FieldDropdown([["cm", "cm"],  ["inch", "inch"]]), "UNIT");
     this.setOutput(true, 'Number');
     this.setTooltip('Non-contact distance measurement module');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_Ultrasonic_Ranger');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Ultrasonic_Ranger/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -292,7 +292,7 @@ Blockly.Blocks['grove_motor_shield'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Drive two brushed DC motors');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/Motor_Shield');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Motor_Shield/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -309,7 +309,7 @@ Blockly.Blocks['grove_thumb_joystick'] = {
         .appendField(new Blockly.FieldDropdown([["x", "x"],  ["y", "y"]]), "AXIS");
     this.setOutput(true, 'Number');
 	this.setTooltip('output two analog values(200~800) representing two directions');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_Thumb_Joystick');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Thumb_Joystick/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
@@ -331,7 +331,7 @@ Blockly.Blocks['grove_rgb_led'] = {
     this.setNextStatement(true, null);
     this.setTooltip('256 color LED, currently Chainable feature is not support');
     this.itemCount_ = 1;
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/index.php?title=Twig_-_Chainable_RGB_LED');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Chainable_RGB_LED/');
     this.setColour('%{BKY_GROVE_HUE}');
   },
   mutationToDom: function() {
@@ -492,7 +492,7 @@ Blockly.Blocks['grove_bluetooth_slave'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Bluetooth V2.0+EDR slave. Support single slave per board');
-    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_Serial_Bluetooth');
+    this.setHelpUrl('http://wiki.seeedstudio.com/Grove-Serial_Bluetooth/');
     this.setColour('%{BKY_GROVE_HUE}');
   }
 };
