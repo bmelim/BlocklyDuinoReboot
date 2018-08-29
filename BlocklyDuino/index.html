@@ -408,9 +408,10 @@
     <category name="%{BKY_CATFUNCTIONS}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>	
     <sep></sep>
     <category name="%{BKY_CAT_ARDUINO_BASE}" colour="%{BKY_ARDUINO_BASE_HUE}">
-      <block type="arduino_base_inout_highlow"></block>
+      <block type="arduino_base_inout_buildin_led"></block>
       <block type="arduino_base_inout_digital_write"></block>
       <block type="arduino_base_inout_digital_read"></block>
+      <block type="arduino_base_inout_highlow"></block>
       <block type="arduino_base_inout_analog_write">
         <value name="PWM">
           <shadow type="math_number">
@@ -419,13 +420,10 @@
         </value>
       </block>
       <block type="arduino_base_inout_analog_read"></block>
-      <block type="arduino_base_serial_print">
-        <value name="CONTENT">
-          <shadow type="text">
-            <field name="TEXT"></field>
-          </shadow>
-        </value>
-      </block>
+      <block type="arduino_base_delay"></block>
+      <block type="arduino_base_angle"></block>
+      <block type="arduino_base_date"></block>
+      <block type="arduino_base_map"></block>
       <block type="arduino_base_inout_tone">
         <value name="NUM">
           <shadow type="math_number">
@@ -434,7 +432,13 @@
         </value>
       </block>
       <block type="arduino_base_inout_notone"></block>
-      <block type="arduino_base_inout_buildin_led"></block>
+      <block type="arduino_base_serial_print">
+        <value name="CONTENT">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
     </category>
     <category name="%{BKY_CAT_GROVE}" colour="%{BKY_GROVE_HUE}">
       <block type="grove_led"></block>
@@ -449,7 +453,7 @@
     </category>
     <category name="%{BKY_CAT_GROVE_ANALOG}" colour="%{BKY_GROVE_HUE}">
       <block type="grove_rotary_angle"></block>
-      <block type="grove_temporature_sensor"></block>
+      <block type="grove_temperature_sensor"></block>
       <block type="grove_sound_sensor"></block>
       <block type="grove_thumb_joystick"></block>
     </category>

@@ -128,7 +128,7 @@ Blockly.Arduino['grove_relay'] = function(block) {
   return code;
 };
 
-Blockly.Arduino['grove_temporature_sensor'] = function(block) {
+Blockly.Arduino['grove_temperature_sensor'] = function(block) {
   var dropdown_pin = block.getFieldValue('PIN');
   /*
   a=analogRead(0);
