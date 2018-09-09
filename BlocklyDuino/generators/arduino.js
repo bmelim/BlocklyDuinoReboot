@@ -28,7 +28,6 @@
 goog.provide('Blockly.Arduino');
 
 goog.require('Blockly.Generator');
-goog.require('Blockly.FieldDate');
 
 
 /**
@@ -227,7 +226,7 @@ Blockly.Arduino.finish = function(code) {
   // Convert the setups dictionary into a list.
   var setups = [];
   for (var name in Blockly.Arduino.setups_) {
-    setups.push(Blockly.Arduino.setups_[name]);
+	setups.push(Blockly.Arduino.setups_[name]);
   }
   // Clean up temporary data.
   delete Blockly.Arduino.definitions_;

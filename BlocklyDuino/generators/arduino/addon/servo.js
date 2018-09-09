@@ -47,7 +47,7 @@ Blockly.Arduino['servo_move'] = function(block) {
   var dropdown_pin = block.getFieldValue('PIN');
   var value_degree = Blockly.Arduino.valueToCode(block, 'DEGREE', Blockly.Arduino.ORDER_ATOMIC);
 
-  Blockly.Arduino.definitions_['define_servo'] = "#include <Servo.h>\n";
+  Blockly.Arduino.definitions_['define_servo'] = '#include <Servo.h>\n';
   Blockly.Arduino.definitions_['var_servo' + dropdown_pin] = 'Servo servo_' + dropdown_pin + ';\n';
   Blockly.Arduino.setups_['setup_servo_' + dropdown_pin] = 'servo_' + dropdown_pin + '.attach(' + dropdown_pin + ');\n';
 
