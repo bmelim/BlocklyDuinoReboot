@@ -34,7 +34,7 @@ Blockly.Blocks['servo_move'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Servo")
-        .appendField(new Blockly.FieldImage("./blocks/servo/EMAX_Servo.jpg", 64, 64))
+        .appendField(new Blockly.FieldImage("./blocks/servo/servo.jpg", 64, 64))
         .appendField("PIN#")
         .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.appendValueInput("DEGREE")
@@ -53,7 +53,7 @@ Blockly.Blocks['servo_read_degrees'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Servo")
-        .appendField(new Blockly.FieldImage("./blocks/servo/EMAX_Servo.jpg", 64, 64))
+        .appendField(new Blockly.FieldImage("./blocks/servo/servo.jpg", 64, 64))
         .appendField("PIN#")
         .appendField(new Blockly.FieldDropdown(profile.default.dropdownDigital), "PIN");
     this.appendDummyInput()

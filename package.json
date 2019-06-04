@@ -1,56 +1,24 @@
 {
-  "name": "blockly",
-  "version": "1.20180629.0",
-  "description": "Blockly is a library for building visual programming editors.",
-  "main": "blockly_node_javascript_en.js",
-  "keywords": [
-    "blockly"
-  ],
+  "name": "BlocklyDuino",
+  "version": "0.2.0",
+  "description": "BlocklyDuino is a web-based visual programming editor for arduino",
+  "main": "blocklyduino/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "blockly:upgrade": "git submodule init && git submodule update --recursive --remote"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/google/blockly.git"
+    "url": "git+https://github.com/BlocklyDuino/BlocklyDuino.git"
   },
-  "bugs": {
-    "url": "https://github.com/google/blockly/issues"
-  },
-  "homepage": "https://developers.google.com/blockly/",
-  "author": {
-    "name": "Neil Fraser"
-  },
-  "scripts": {
-    "prepare": "gulp blockly_javascript_en",
-    "lint": "eslint .",
-    "test": "tests/run_all_tests.sh"
-  },
+  "keywords": [
+    "blockly",
+    "arduino"
+  ],
+  "author": "gasolin",
   "license": "Apache-2.0",
-  "private": true,
-  "devDependencies": {
-    "eslint": "^4.19.1",
-    "google-closure-compiler": "^20180610.0.2",
-    "google-closure-library": "^20180506.0.0",
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-insert": "^0.5.0",
-    "gulp-series": "^1.0.2",
-    "gulp-shell": "^0.6.5",
-    "jshint": "^2.9.5",
-    "webdriverio": "^4.13.1"
+  "bugs": {
+    "url": "https://github.com/BlocklyDuino/BlocklyDuino/issues"
   },
-  "jshintConfig": {
-    "globalstrict": true,
-    "predef": [
-      "Blockly",
-      "goog",
-      "window",
-      "document",
-      "soy",
-      "XMLHttpRequest"
-    ],
-    "sub": true,
-    "undef": true,
-    "unused": true
-  },
-  "dependencies": {
-    "jsdom": "^11.11.0"
-  }
+  "homepage": "https://github.com/BlocklyDuino/BlocklyDuino#readme"
 }
