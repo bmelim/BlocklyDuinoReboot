@@ -28,10 +28,10 @@
 /**
  * Prepare code to send it to function Code.uploadCode.
  */
-Code.uploadClick = function() {
+BlocklyDuino.uploadClick = function() {
     var code = Blockly.Arduino.workspaceToCode();
     alert("Ready to upload to Arduino.");    
-    Code.uploadCode(code, function(status, errorInfo) {
+    BlocklyDuino.uploadCode(code, function(status, errorInfo) {
         if (status == 200) {
             alert("Program uploaded ok");
         } else {
@@ -43,7 +43,7 @@ Code.uploadClick = function() {
 /**
  * Send code to Python server on 8080 port.
  */
-Code.uploadCode = function(code, callback) {
+BlocklyDuino.uploadCode = function(code, callback) {
     var target = document.getElementById('content_arduino');
     var spinner = new Spinner().spin(target);
 
@@ -90,7 +90,7 @@ Code.uploadCode = function(code, callback) {
 /**
  * Send blank code to Python server to 'clean' Arduino card firmware.
  */
-Code.resetClick = function() {
+BlocklyDuino.resetClick = function() {
     var code = "void setup() {} void loop() {}";
 
     uploadCode(code, function(status, errorInfo) {
@@ -103,7 +103,7 @@ Code.resetClick = function() {
 /**
 * Save Arduino generated code to local file.
 */
-Code.saveCode = function() {
+BlocklyDuino.saveCode = function() {
   var fileName = window.prompt('What would you like to name your file?', 'BlocklyDuino')
   //doesn't save if the user quits the save prompt
   if(fileName){
@@ -117,7 +117,7 @@ Code.saveCode = function() {
  * Save blocks to local file.
  * better include Blob and FileSaver for browser compatibility
  */
-Code.saveXML = function() {
+BlocklyDuino.saveXML = function() {
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   var data = Blockly.Xml.domToText(xml);
   var fileName = window.prompt('What would you like to name your file?', 'BlocklyDuino');
@@ -130,7 +130,7 @@ Code.saveXML = function() {
 /**
  * Restore code blocks from localStorage, needed for XML load.
  */
-Code.restore_blocks = function() {
+BlocklyDuino.restore_blocks = function() {
   if ('localStorage' in window && window.localStorage.arduino) {
     var xml = Blockly.Xml.textToDom(window.localStorage.arduino);
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
@@ -141,10 +141,10 @@ Code.restore_blocks = function() {
  * auto save and restore blocks
  * for XML load
  */
-Code.auto_save_and_restore_blocks = function() {
+BlocklyDuino.auto_save_and_restore_blocks = function() {
   // Restore saved blocks in a separate thread so that subsequent
   // initialization is not affected from a failed load.
-  window.setTimeout(Code.restore_blocks, 0);
+  window.setTimeout(BlocklyDuino.restore_blocks, 0);
   // Hook a save function onto unload.
   bindEvent(window, 'unload', backup_blocks);
   tabClick(selected);
@@ -208,3 +208,20 @@ function loadXMLfunction(event) {
   };
   reader.readAsText(files[0]);
 };
+
+
+/**
+ * Change theme and color, useful for disabled people
+ */
+function changeTheme() {
+  var theme = document.getElementById('themeChanger');
+  if (theme.value === "modern") {
+    Blockly.setTheme(Blockly.Themes.Modern);
+  } else if (theme.value === "high_contrast") {
+    Blockly.setTheme(Blockly.Themes.HighContrast);
+  } else if (theme.value === "black_white") {
+    Blockly.setTheme(Blockly.Themes.BlackWhite);
+  } else {
+    Blockly.setTheme(Blockly.Themes.Classic);
+  }
+}

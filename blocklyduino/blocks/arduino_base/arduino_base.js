@@ -40,7 +40,7 @@ Blockly.Blocks['arduino_base_inout_buildin_led'] = {
      this.setPreviousStatement(true, null);
      this.setNextStatement(true, null);
      this.setTooltip(Blockly.Msg.ARDUINO_INOUT_BUILDIN_LED_TOOLTIP);
-    this.setColour('%{BKY_ARDUINO_BASE_HUE}');
+    this.setStyle('arduino_blocks');
    }
 };
 
@@ -56,7 +56,7 @@ Blockly.Blocks['arduino_base_inout_digital_write'] = {
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARDUINO_INOUT_DIGITAL_WRITE_TOOLTIP);
     this.setHelpUrl(Blockly.Msg.ARDUINO_INOUT_DIGITAL_WRITE_HELPURL);
-    this.setColour('%{BKY_ARDUINO_BASE_HUE}');
+    this.setStyle('arduino_blocks');
   }
 };
 
@@ -68,7 +68,7 @@ Blockly.Blocks['arduino_base_inout_digital_read'] = {
     this.setOutput(true, 'Boolean');
     this.setTooltip(Blockly.Msg.ARDUINO_INOUT_DIGITAL_READ_TOOLTIP);
     this.setHelpUrl(Blockly.Msg.ARDUINO_INOUT_DIGITAL_READ_HELPURL);
-    this.setColour('%{BKY_ARDUINO_BASE_HUE}');
+    this.setStyle('arduino_blocks');
   }
 };
 
@@ -79,7 +79,7 @@ Blockly.Blocks['arduino_base_inout_highlow'] = {
     this.setOutput(true, 'Boolean');
     this.setTooltip(Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP);
     this.setHelpUrl(Blockly.Msg.ARDUINO_INOUT_ONOFF_HELPURL);
-    this.setColour('%{BKY_ARDUINO_BASE_HUE}');
+    this.setStyle('arduino_blocks');
   }
 };
 
@@ -97,7 +97,7 @@ Blockly.Blocks['arduino_base_inout_analog_write'] = {
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARDUINO_INOUT_ANALOG_WRITE_TOOLTIP);
     this.setHelpUrl(Blockly.Msg.ARDUINO_INOUT_ANALOG_WRITE_HELPURL);
-    this.setColour('%{BKY_ARDUINO_BASE_HUE}');
+    this.setStyle('arduino_blocks');
   }
 };
 
@@ -109,7 +109,7 @@ Blockly.Blocks['arduino_base_inout_analog_read'] = {
     this.setOutput(true, 'Number');
     this.setTooltip(Blockly.Msg.ARDUINO_INOUT_ANALOG_READ_TOOLTIP);
     this.setHelpUrl(Blockly.Msg.ARDUINO_INOUT_ANALOG_READ_HELPURL);
-    this.setColour('%{BKY_ARDUINO_BASE_HUE}');
+    this.setStyle('arduino_blocks');
   }
 };
 
@@ -123,7 +123,7 @@ Blockly.Blocks['arduino_base_delay'] = {
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARDUINO_BASE_DELAY_TOOLTIP);
     this.setHelpUrl(Blockly.Msg.ARDUINO_BASE_DELAY_HELPURL);
-    this.setColour('%{BKY_ARDUINO_BASE_HUE}');
+    this.setStyle('arduino_blocks');
   }
 };
 
@@ -135,7 +135,7 @@ Blockly.Blocks['arduino_base_angle'] = {
     this.setOutput(true, 'Number');
     this.setTooltip(Blockly.Msg.ARDUINO_BASE_ANGLE_TOOLTIP);
     this.setHelpUrl(Blockly.Msg.ARDUINO_BASE_ANGLE_HELPURL);
-    this.setColour('%{BKY_ARDUINO_BASE_HUE}');
+    this.setStyle('arduino_blocks');
   }
 };
 
@@ -149,7 +149,7 @@ Blockly.Blocks['arduino_base_angle'] = {
      this.setOutput(true, 'Number');
      this.setTooltip('Date entrie as yyyy-mm-dd');
      this.setHelpUrl('');
-     this.setColour('%{BKY_ARDUINO_BASE_HUE}');
+    this.setStyle('arduino_blocks');
    }
  };
 
@@ -167,7 +167,7 @@ Blockly.Blocks['arduino_base_map'] = {
     this.setOutput(true);
     this.setTooltip('Re-maps a number from [0-1024] to another.');
     this.setHelpUrl('https://www.arduino.cc/reference/en/language/functions/math/map/');
-    this.setColour('%{BKY_ARDUINO_BASE_HUE}');
+    this.setStyle('arduino_blocks');
   }
 };
 
@@ -184,7 +184,7 @@ Blockly.Blocks['arduino_base_inout_tone'] = {
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARDUINO_TONE_TOOLTIP);
     this.setHelpUrl(Blockly.Msg.ARDUINO_TONE_HELPURL);
-    this.setColour('%{BKY_ARDUINO_BASE_HUE}');
+    this.setStyle('arduino_blocks');
   }
 };
 
@@ -198,7 +198,7 @@ Blockly.Blocks['arduino_base_inout_notone'] = {
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARDUINO_NOTONE_TOOLTIP);
     this.setHelpUrl(Blockly.Msg.ARDUINO_NOTONE_HELPURL);
-    this.setColour('%{BKY_ARDUINO_BASE_HUE}');
+    this.setStyle('arduino_blocks');
   }
 };
 
@@ -210,6 +210,6 @@ Blockly.Blocks['arduino_base_serial_print'] = {
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARDUINO_SERIAL_PRINT_TOOLTIP);
     this.setHelpUrl(Blockly.Msg.ARDUINO_SERIAL_PRINT_HELPURL);
-    this.setColour('%{BKY_ARDUINO_BASE_HUE}');
+    this.setStyle('arduino_blocks');
   }
 };

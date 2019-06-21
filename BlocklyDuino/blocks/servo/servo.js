@@ -45,7 +45,7 @@ Blockly.Blocks['servo_move'] = {
     this.setNextStatement(true, null);
     this.setTooltip('move between 0~180 degree');
     this.setHelpUrl('http://playground.arduino.cc/ComponentLib/servo');
-    this.setColour('%{BKY_SERVO_HUE}');
+    this.setStyle('servo_blocks');
   }
 };
 
@@ -62,6 +62,6 @@ Blockly.Blocks['servo_read_degrees'] = {
     this.setOutput(true, 'Number');
     this.setTooltip('return that degree with the last servo move.');
     this.setHelpUrl('http://playground.arduino.cc/ComponentLib/servo');
-    this.setColour('%{BKY_SERVO_HUE}');
+    this.setStyle('servo_blocks');
   }
 };
