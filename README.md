@@ -17,12 +17,12 @@ BlocklyDuino also support [Grove](http://www.seeedstudio.com/wiki/GROVE_System) 
 ### Demo
 
 BlocklyDuino is a web tool. You can give it a try at
-[Web](http://blocklyduino.github.io/BlocklyDuino/blockly/apps/blocklyduino/) to see the working BlocklyDuino.
+[Web](https://blocklyduino.github.io/BlocklyDuinoReboot/blocklyduino/) to see the working BlocklyDuino.
 
 You can link directly to examples
-* [demo 1](http://blocklyduino.github.io/BlocklyDuino/blockly/apps/blocklyduino/index.html?url=examples/blink.xml) make default LED blink
-* [demo 2](http://blocklyduino.github.io/BlocklyDuino/blockly/apps/blocklyduino/index.html?url=examples/servo_potentio.xml) control servo with potentio rotator
-* [demo 3](http://blocklyduino.github.io/BlocklyDuino/blockly/apps/blocklyduino/index.html?url=examples/click_color.xml) click button to change LED colors
+* [demo 1](https://blocklyduino.github.io/BlocklyDuinoReboot/blocklyduino/index.html?url=examples/blink.xml) make default LED blink
+* [demo 2](https://blocklyduino.github.io/BlocklyDuinoReboot/blocklyduino/index.html?url=examples/servo_potentio.xml) control servo with potentio rotator
+* [demo 3](https://blocklyduino.github.io/BlocklyDuinoReboot/blocklyduino/index.html?url=examples/click_color.xml) click button to change LED colors
 
 ### Run locally on your web browser
 
