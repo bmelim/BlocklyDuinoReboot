@@ -85,6 +85,11 @@ var defaultBlockStyles = {
     "colourSecondary":"#007481",
     "colourTertiary":"#007481"
   },
+  "seeed_blocks":{
+    "colourPrimary": "#91C11E",
+    "colourSecondary":"#91C11E",
+    "colourTertiary":"#91C11E"
+  },
   "grove_blocks":{
     "colourPrimary": "#018770",
     "colourSecondary":"#018770",
@@ -127,6 +132,9 @@ var categoryStyles = {
   },
   "arduino_category":{
     "colour":"#007481"
+  },
+  "seeed_category":{
+    "colour":"#91C11E"
   },
   "grove_category":{
     "colour":"#018770"

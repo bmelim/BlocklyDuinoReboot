@@ -553,5 +553,6 @@ document.write('<script src="../blockly/msg/js/' + BlocklyDuino.LANG + '.js"></s
 // Load BlocklyDuino's language strings.
 document.write('<script src="./msg/blocklyduino/' + BlocklyDuino.LANG + '.js"></script>\n');
 document.write('<script src="./msg/blocks/' + BlocklyDuino.LANG + '.js"></script>\n');
+document.write('<script src="./msg/categories/' + BlocklyDuino.LANG + '.js"></script>\n');
 
 window.addEventListener('load', BlocklyDuino.init);

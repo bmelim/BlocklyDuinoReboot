@@ -6,14 +6,6 @@ goog.require('Blockly.Msg');
 
 Blockly.Msg.TITLE2 = " > programmation visuelle par blocs pour Arduino";
 
-// toolbox categories name
-Blockly.Msg.CAT_ARDUINO_BASE = "entées / sorties";
-Blockly.Msg.CAT_SERVO = "servomoteurs";
-Blockly.Msg.CAT_GROVE = "Grove";
-Blockly.Msg.CAT_GROVE_ANALOG = "Grove - analogique";
-Blockly.Msg.CAT_GROVE_LCD = "Grove - LCD";
-Blockly.Msg.CAT_GROVE_MOTOR = "Grove - moteurs";
-
 //text in blocks
 Blockly.Msg.FIELDDROPDOWN = [["1 (état haut)", "HIGH"], ["0 (état bas)", "LOW"]];
 
