@@ -490,7 +490,7 @@ BlocklyDuino.initLanguage = function() {
   languageMenu.addEventListener('change', BlocklyDuino.changeLanguage, true);
 
   // Inject language strings.
-  document.title += ' ' + MSG['title'];
+  // document.title += ' ' + MSG['title'];
   // document.getElementById('title').textContent = MSG['title'];
   document.getElementById('tab_blocks').textContent = MSG['blocks'];
 
@@ -500,6 +500,8 @@ BlocklyDuino.initLanguage = function() {
   //change Blockly title span by this one
   document.getElementById('title2').textContent = Blockly.Msg.TITLE2;
   //change Blockly title buttons by this one
+  document.getElementById('languageSpan').textContent = MSG['languageSpan'];
+  document.getElementById('themeSpan').textContent = MSG['themeSpan'];
   document.getElementById('uploadButton_span').textContent = MSG['uploadButton_span'];
   document.getElementById('resetButton_span').textContent = MSG['resetButton_span'];
   document.getElementById('trashButton_span').textContent = MSG['trashButton_span'];

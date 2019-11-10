@@ -9,13 +9,12 @@
   <!-- Blockly basics -->
   <script type="text/javascript" src="../blockly/blockly_compressed.js"></script>
   <script type="text/javascript" src="../blockly/blocks_compressed.js"></script>
-  <script type="text/javascript" src="../blockly/python_compressed.js"></script>
   <script type="text/javascript" src="../blockly/appengine/storage.js"></script>
   <script type="text/javascript" src="../blockly/core/utils/xml.js"></script>
   
   <!-- BlocklyDuino specific, order is important -->
-  <script type="text/javascript" src="js/BlocklyDuino_buttons_functions.js"></script>
   <script type="text/javascript" src="js/BlocklyDuino_language.js"></script>
+  <script type="text/javascript" src="js/BlocklyDuino_buttons_functions.js"></script>
   <script type="text/javascript" src="js/BlocklyDuino_variables_dynamic.js"></script>
   <script type="text/javascript" src="js/arduino_boards.js"></script>
   <script type="text/javascript" src="js/addon/Blob.js"></script>
@@ -26,7 +25,7 @@
   <script type="text/javascript" src="blocks/grove/grove.js"></script>
   <script type="text/javascript" src="blocks/servo/servo.js"></script>
   <!-- BlocklyDuino specific: common generator code -->
-  <script type="text/javascript" src="generators/arduino.js"></script>
+  <script type="text/javascript" src="generators/arduino_generator.js"></script>
   <script type="text/javascript" src="generators/arduino/blockly/colour.js"></script>
   <script type="text/javascript" src="generators/arduino/blockly/lists.js"></script>
   <script type="text/javascript" src="generators/arduino/blockly/logic.js"></script>
@@ -58,7 +57,10 @@
         </h1>
       </td>
       <td class="farSide" id="selects">
+		<span id="languageSpan">...</span>
         <select id="languageMenu"></select>
+		<br />
+		<span id="themeSpan">...</span>
 		<select id="themeChanger" name="theme" onchange="changeTheme()">
 			<option value="classic">Classic</option>
 			<option value="modern">Modern</option>
