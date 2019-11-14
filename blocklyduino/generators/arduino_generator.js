@@ -21,13 +21,14 @@
 /**
  * @fileoverview Helper functions for generating Arduino for blocks.
  * @author gasolin@gmail.com (Fred Lin)
- * @reboot scanet@libreduc.cc (SebCanet)
+ * @author scanet@libreduc.cc (SebCanet)
  */
 'use strict';
 
 goog.provide('Blockly.Arduino');
 
 goog.require('Blockly.Generator');
+goog.require('Blockly.utils.string');
 
 /**
  * Arduino code generator.

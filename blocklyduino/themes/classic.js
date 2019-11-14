@@ -1,9 +1,6 @@
 /**
  * @license
- * Visual Blocks Editor
- *
- * Copyright 2018 Google Inc.
- * https://developers.google.com/blockly/
+ * Copyright 2018 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +17,22 @@
 
 /**
  * @fileoverview Classic theme.
- * Contains multi colored border to create shadow effect.
+ * Contains multi-coloured border to create shadow effect.
+ * forked from original Blockly file
+ * @author scanet@libreduc.cc (Sébastien Canet)
  */
-
 'use strict';
 
-goog.provide('Blockly.Themes.Classic');
+goog.provide('Blockly.Themes.blocklyClassic');
 
 goog.require('Blockly.Theme');
 
-var defaultBlockStyles = {
-  "colour_blocks":{
+
+// Temporary holding object.
+Blockly.Themes.blocklyClassic = {};
+
+Blockly.Themes.blocklyClassic.defaultBlockStyles = {
+  "colour_blocks": {
     "colourPrimary": "20"
   },
   "list_blocks": {
@@ -54,20 +56,18 @@ var defaultBlockStyles = {
   "variable_blocks": {
     "colourPrimary": "330"
   },
-  "variable_dynamic_blocks":{
+  "variable_dynamic_blocks": {
     "colourPrimary": "310"
   },
-  "hat_blocks":{
-    "colourPrimary":"330",
-    "hat":"cap"
+  "hat_blocks": {
+    "colourPrimary": "330",
+    "hat": "cap"
   },
   "arduino_blocks":{
     "colourPrimary":"#007481"
   },
   "seeed_blocks":{
-    "colourPrimary": "#91C11E",
-    "colourSecondary":"#91C11E",
-    "colourTertiary":"#91C11E"
+    "colourPrimary": "#91C11E"
   },
   "grove_blocks":{
     "colourPrimary":"#018770"
@@ -77,8 +77,8 @@ var defaultBlockStyles = {
   }
 };
 
-var categoryStyles = {
-  "colour_category":{
+Blockly.Themes.blocklyClassic.categoryStyles = {
+  "colour_category": {
     "colour": "20"
   },
   "list_category": {
@@ -102,7 +102,7 @@ var categoryStyles = {
   "variable_category": {
     "colour": "330"
   },
-  "variable_dynamic_category":{
+  "variable_dynamic_category": {
     "colour": "310"
   },
   "arduino_category":{
@@ -119,4 +119,6 @@ var categoryStyles = {
   }
 };
 
-Blockly.Themes.Classic = new Blockly.Theme(defaultBlockStyles, categoryStyles);
+Blockly.Themes.blocklyClassic =
+    new Blockly.Theme(Blockly.Themes.blocklyClassic.defaultBlockStyles,
+        Blockly.Themes.blocklyClassic.categoryStyles);

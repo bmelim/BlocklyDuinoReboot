@@ -23,11 +23,14 @@
  */
 'use strict';
 
-goog.provide('Blockly.Themes.BlackWhite');
+goog.provide('Blockly.Themes.blackWhite');
 
 goog.require('Blockly.Theme');
 
-var defaultBlockStyles = {
+// Temporary holding object.
+Blockly.Themes.blackWhite = {};
+
+Blockly.Themes.blackWhite.defaultBlockStyles = {
   "colour_blocks":{
     "colourPrimary": "#000000",
     "colourSecondary":"#000000",
@@ -101,7 +104,7 @@ var defaultBlockStyles = {
   }
 };
 
-var categoryStyles = {
+Blockly.Themes.blackWhite.categoryStyles = {
   "colour_category":{
     "colour": "#000000",
   },
@@ -130,18 +133,19 @@ var categoryStyles = {
     "colour": "#000000",
   },
   "arduino_category":{
-    "colour":"#000000"
+    "colour":"#000000",
   },
   "seeed_category":{
-    "colour":"#000000"
+    "colour":"#000000",
   },
   "grove_category":{
-    "colour":"#000000"
+    "colour":"#000000",
   },
   "servo_category":{
-    "colour":"#000000"
+    "colour":"#000000",
   }
 };
 
-//This style is still being fleshed out and may change.
-Blockly.Themes.BlackWhite = new Blockly.Theme(defaultBlockStyles, categoryStyles);
+Blockly.Themes.blackWhite =
+    new Blockly.Theme(Blockly.Themes.blackWhite.defaultBlockStyles,
+        Blockly.Themes.blackWhite.categoryStyles);

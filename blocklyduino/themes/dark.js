@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,22 +16,22 @@
  */
 
 /**
- * @fileoverview Modern theme.
- * Same colours as classic, but single coloured border.
+ * @fileoverview Dark theme.
+ * @author samelh@google.com (Sam El-Husseini)
  * forked from original Blockly file
  * @author scanet@libreduc.cc (Sébastien Canet)
  */
 'use strict';
 
-goog.provide('Blockly.Themes.blocklyModern');
+goog.provide('Blockly.Themes.blocklyDark');
 
 goog.require('Blockly.Theme');
 
 
 // Temporary holding object.
-Blockly.Themes.blocklyModern = {};
+Blockly.Themes.blocklyDark = {};
 
-Blockly.Themes.blocklyModern.defaultBlockStyles = {
+Blockly.Themes.blocklyDark.defaultBlockStyles = {
   "colour_blocks": {
     "colourPrimary": "#a5745b",
     "colourSecondary": "#dbc7bd",
@@ -85,27 +85,27 @@ Blockly.Themes.blocklyModern.defaultBlockStyles = {
   },
   "arduino_blocks":{
     "colourPrimary": "#007481",
-    "colourSecondary":"#007481",
-    "colourTertiary":"#007481"
+    "colourSecondary":"#dbbdd6",
+    "colourTertiary":"#84497a"
   },
   "seeed_blocks":{
     "colourPrimary": "#91C11E",
-    "colourSecondary":"#91C11E",
-    "colourTertiary":"#91C11E"
+    "colourSecondary":"#dbbdd6",
+    "colourTertiary":"#84497a"
   },
   "grove_blocks":{
     "colourPrimary": "#018770",
-    "colourSecondary":"#018770",
-    "colourTertiary":"#018770"
+    "colourSecondary":"#dbbdd6",
+    "colourTertiary":"#84497a"
   },
   "servo_blocks":{
     "colourPrimary": "#343434",
-    "colourSecondary":"#343434",
-    "colourTertiary":"#343434"
+    "colourSecondary":"#dbbdd6",
+    "colourTertiary":"#84497a"
   }
 };
 
-Blockly.Themes.blocklyModern.categoryStyles = {
+Blockly.Themes.blocklyDark.categoryStyles = {
   "colour_category": {
     "colour": "#a5745b"
   },
@@ -130,8 +130,8 @@ Blockly.Themes.blocklyModern.categoryStyles = {
   "variable_category": {
     "colour": "#a55b99"
   },
-  "variable_dynamic_category":{
-    "colour": "#a55b99",
+  "variable_dynamic_category": {
+    "colour": "#a55b99"
   },
   "arduino_category":{
     "colour":"#007481"
@@ -148,6 +148,15 @@ Blockly.Themes.blocklyModern.categoryStyles = {
 };
 
 // This style is still being fleshed out and may change.
-Blockly.Themes.blocklyModern =
-    new Blockly.Theme(Blockly.Themes.blocklyModern.defaultBlockStyles,
-        Blockly.Themes.blocklyModern.categoryStyles);
+Blockly.Themes.blocklyDark =
+    new Blockly.Theme(Blockly.Themes.blocklyDark.defaultBlockStyles,
+        Blockly.Themes.blocklyDark.categoryStyles);
+
+Blockly.Themes.blocklyDark.setComponentStyle('workspace', '#1e1e1e');
+Blockly.Themes.blocklyDark.setComponentStyle('toolbox', '#333');
+Blockly.Themes.blocklyDark.setComponentStyle('toolboxText', '#fff');
+Blockly.Themes.blocklyDark.setComponentStyle('flyout', '#252526');
+Blockly.Themes.blocklyDark.setComponentStyle('flyoutText', '#ccc');
+Blockly.Themes.blocklyDark.setComponentStyle('flyoutOpacity', 1);
+Blockly.Themes.blocklyDark.setComponentStyle('scrollbar', '#797979');
+Blockly.Themes.blocklyDark.setComponentStyle('scrollbarOpacity', 0.4);

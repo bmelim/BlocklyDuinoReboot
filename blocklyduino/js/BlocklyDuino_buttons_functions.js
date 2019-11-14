@@ -208,20 +208,3 @@ function loadXMLfunction(event) {
   };
   reader.readAsText(files[0]);
 };
-
-
-/**
- * Change theme and color, useful for disabled people
- */
-function changeTheme() {
-  var theme = document.getElementById('themeChanger');
-  if (theme.value === "modern") {
-    Blockly.setTheme(Blockly.Themes.Modern);
-  } else if (theme.value === "high_contrast") {
-    Blockly.setTheme(Blockly.Themes.HighContrast);
-  } else if (theme.value === "black_white") {
-    Blockly.setTheme(Blockly.Themes.BlackWhite);
-  } else {
-    Blockly.setTheme(Blockly.Themes.Classic);
-  }
-}

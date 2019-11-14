@@ -21,6 +21,8 @@
 /**
  * @fileoverview JavaScript for Blockly's Code demo.
  * @author fraser@google.com (Neil Fraser)
+ * @author gasolin@gmail.com (Fred Lin)
+ * @author scanet@libreduc.cc (Sébastien Canet)
  */
 'use strict';
 
@@ -50,6 +52,23 @@ BlocklyDuino.LANGUAGE_RTL = ['ar', 'fa', 'he', 'lki'];
  */
 BlocklyDuino.workspace = null;
 
+/**
+ * Change theme and color, useful for disabled people
+ */
+function changeTheme() {
+  var theme = document.getElementById('themeChanger');
+  if (theme.value === "blocklyModern") {
+    Blockly.getMainWorkspace().setTheme(Blockly.Themes.blocklyModern);
+  } else if (theme.value === "blocklyDark") {
+    Blockly.getMainWorkspace().setTheme(Blockly.Themes.blocklyDark);
+  } else if (theme.value === "blocklyHigh_contrast") {
+    Blockly.getMainWorkspace().setTheme(Blockly.Themes.blocklyHigh_contrast);
+  } else if (theme.value === "blackWhite") {
+    Blockly.getMainWorkspace().setTheme(Blockly.Themes.blackWhite);
+  } else {
+    Blockly.getMainWorkspace().setTheme(Blockly.Themes.blocklyClassic);
+  }
+};
 /**
  * Extracts a parameter from the URL.
  * If the parameter is absent default_value is returned.
@@ -339,7 +358,7 @@ BlocklyDuino.checkAllGeneratorFunctionsDefined = function(generator) {
  */
 BlocklyDuino.init = function() {
   BlocklyDuino.initLanguage();
-
+  
   var rtl = BlocklyDuino.isRtl();
   var container = document.getElementById('content_area');
   var onresize = function(e) {
@@ -379,20 +398,10 @@ BlocklyDuino.init = function() {
   }
 
   // Construct the toolbox XML, replacing translated variable names.
-  // var toolboxText = document.getElementById('toolbox').outerHTML;
-  // toolboxText = toolboxText.replace(/(^|[^%]){(\w+)}/g,
-	  // function(m, p1, p2) {return p1 + MSG[p2];});
-  // var toolboxXml = Blockly.Xml.textToDom(toolboxText);
-  
-  // Use external file, BlocklyDuino enhancement
-	var xml = null;
-	var request = new XMLHttpRequest();
-	request.open('GET', 'toolbox/blocklyduino.xml', false);	 
-	request.send();
-	if (request.readyState == 4 && request.status == 200) {
-		xml = request.responseXML;
-	}
-	var toolboxXml = new XMLSerializer().serializeToString(xml.documentElement);
+  var toolboxText = document.getElementById('blocklyduinoToolbox').outerHTML;
+  toolboxText = toolboxText.replace(/(^|[^%]){(\w+)}/g,
+	  function(m, p1, p2) {return p1 + MSG[p2];});
+  var toolboxXml = Blockly.Xml.textToDom(toolboxText);
 
   BlocklyDuino.workspace = Blockly.inject('content_blocks',
 		{
@@ -448,6 +457,8 @@ BlocklyDuino.init = function() {
 		function(name_) {return function() {BlocklyDuino.tabClick(name_);};}(name));
   }
   onresize();
+  //change theme
+  changeTheme();
   Blockly.svgResize(BlocklyDuino.workspace);
 
   // Lazy-load the syntax-highlighting.
@@ -511,29 +522,6 @@ BlocklyDuino.initLanguage = function() {
 };
 
 /**
- * Execute the user's code.
- * Just a quick and dirty eval.	 Catch infinite loops.
- */
-//not used by BlocklyDuino
-
-// Code.runJS = function() {
-  // Blockly.JavaScript.INFINITE_LOOP_TRAP = '	checkTimeout();\n';
-  // var timeouts = 0;
-  // var checkTimeout = function() {
-	// if (timeouts++ > 1000000) {
-	  // throw MSG['timeout'];
-	// }
-  // };
-  // var code = Blockly.JavaScript.workspaceToCode(Code.workspace);
-  // Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-  // try {
-	// eval(code);
-  // } catch (e) {
-	// alert(MSG['badCode'].replace('%1', e));
-  // }
-// };
-
-/**
  * Discard all blocks from the workspace.
  */
 BlocklyDuino.discard = function() {
@@ -546,15 +534,14 @@ BlocklyDuino.discard = function() {
 	}
   }
 };
-
 // Load the Code demo's language strings.
 // document.write('<script src="../blockly/demos/code/msg/' + Code.LANG + '.js"></script>\n');
 // Load Blockly's language strings.
 document.write('<script src="../blockly/msg/js/' + BlocklyDuino.LANG + '.js"></script>\n');
 
 // Load BlocklyDuino's language strings.
-document.write('<script src="./msg/blocklyduino/' + BlocklyDuino.LANG + '.js"></script>\n');
-document.write('<script src="./msg/blocks/' + BlocklyDuino.LANG + '.js"></script>\n');
-document.write('<script src="./msg/categories/' + BlocklyDuino.LANG + '.js"></script>\n');
+document.write('<script src="./msg/blocklyduino_' + BlocklyDuino.LANG + '.js"></script>\n');
+document.write('<script src="./msg/blocks_' + BlocklyDuino.LANG + '.js"></script>\n');
+document.write('<script src="./msg/categories_' + BlocklyDuino.LANG + '.js"></script>\n');
 
 window.addEventListener('load', BlocklyDuino.init);
