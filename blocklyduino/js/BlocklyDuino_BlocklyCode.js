@@ -57,16 +57,16 @@ BlocklyDuino.workspace = null;
  */
 function changeTheme() {
   var theme = document.getElementById('themeChanger');
-  if (theme.value === "blocklyModern") {
-    Blockly.getMainWorkspace().setTheme(Blockly.Themes.blocklyModern);
-  } else if (theme.value === "blocklyDark") {
-    Blockly.getMainWorkspace().setTheme(Blockly.Themes.blocklyDark);
-  } else if (theme.value === "blocklyHigh_contrast") {
-    Blockly.getMainWorkspace().setTheme(Blockly.Themes.blocklyHigh_contrast);
+  if (theme.value === "Modern") {
+	Blockly.getMainWorkspace().setTheme(Blockly.Themes.Modern);
+  } else if (theme.value === "Dark") {
+	Blockly.getMainWorkspace().setTheme(Blockly.Themes.Dark);
+  } else if (theme.value === "HighContrast") {
+	Blockly.getMainWorkspace().setTheme(Blockly.Themes.HighContrast);
   } else if (theme.value === "blackWhite") {
-    Blockly.getMainWorkspace().setTheme(Blockly.Themes.blackWhite);
+	Blockly.getMainWorkspace().setTheme(Blockly.Themes.blackWhite);
   } else {
-    Blockly.getMainWorkspace().setTheme(Blockly.Themes.blocklyClassic);
+	Blockly.getMainWorkspace().setTheme(Blockly.Themes.Classic);
   }
 };
 /**
@@ -92,6 +92,19 @@ BlocklyDuino.getLang = function() {
 	lang = 'en';
   }
   return lang;
+};
+
+/**
+ * Get the theme of this workspace from the URL.
+ * @return {string} User's theme.
+ */
+BlocklyDuino.getTheme = function() {
+  var theme = BlocklyDuino.getStringParamFromUrl('theme', '');
+  if (BlocklyDuino.LANGUAGE_NAME[theme] === undefined) {
+	// Default to English.
+	theme = 'blocklyModern';
+  }
+  return theme;
 };
 
 /**
@@ -283,18 +296,8 @@ BlocklyDuino.renderContent = function() {
 	var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
 	xmlTextarea.value = xmlText;
 	xmlTextarea.focus();
-  // } else if (content.id == 'content_javascript') {
-	// Code.attemptCodeGeneration(Blockly.JavaScript, 'js');
-  // } else if (content.id == 'content_python') {
-	// Code.attemptCodeGeneration(Blockly.Python, 'py');
-  // } else if (content.id == 'content_php') {
-	// Code.attemptCodeGeneration(Blockly.PHP, 'php');
-  // } else if (content.id == 'content_dart') {
-	// Code.attemptCodeGeneration(Blockly.Dart, 'dart');
   } else if (content.id == 'content_arduino') {
 	BlocklyDuino.attemptCodeGeneration(Blockly.Arduino, 'cpp');
-  // } else if (content.id == 'content_lua') {
-	// Code.attemptCodeGeneration(Blockly.Lua, 'lua');
   }
 };
 
@@ -458,7 +461,10 @@ BlocklyDuino.init = function() {
   }
   onresize();
   //change theme
-  changeTheme();
+  var themeName = BlocklyDuino.getTheme();
+  if (themeName === 'undefined') {
+	changeTheme();
+  } else Blockly.getMainWorkspace().setTheme(Blockly.Themes.themeName);
   Blockly.svgResize(BlocklyDuino.workspace);
 
   // Lazy-load the syntax-highlighting.
