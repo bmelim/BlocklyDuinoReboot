@@ -30,8 +30,8 @@
  * @constructor
  * @extends {Blockly.Cursor}
  */
-Blockly.BasicCursor = function() {
-  Blockly.BasicCursor.superClass_.constructor.call(this);
+Blockly.BasicCursor = function () {
+    Blockly.BasicCursor.superClass_.constructor.call(this);
 };
 Blockly.utils.object.inherits(Blockly.BasicCursor, Blockly.Cursor);
 
@@ -42,18 +42,18 @@ Blockly.utils.object.inherits(Blockly.BasicCursor, Blockly.Cursor);
  * @return {boolean} True if the node should be visited, false otherwise.
  * @private
  */
-Blockly.BasicCursor.prototype.validNode_ = function(node) {
-  var isValid = false;
-  var type = node && node.getType();
-  if (type == Blockly.ASTNode.types.OUTPUT ||
-      type == Blockly.ASTNode.types.INPUT ||
-      type == Blockly.ASTNode.types.FIELD ||
-      type == Blockly.ASTNode.types.NEXT ||
-      type == Blockly.ASTNode.types.PREVIOUS ||
-      type == Blockly.ASTNode.types.WORKSPACE) {
-    isValid = true;
-  }
-  return isValid;
+Blockly.BasicCursor.prototype.validNode_ = function (node) {
+    var isValid = false;
+    var type = node && node.getType();
+    if (type == Blockly.ASTNode.types.OUTPUT ||
+            type == Blockly.ASTNode.types.INPUT ||
+            type == Blockly.ASTNode.types.FIELD ||
+            type == Blockly.ASTNode.types.NEXT ||
+            type == Blockly.ASTNode.types.PREVIOUS ||
+            type == Blockly.ASTNode.types.WORKSPACE) {
+        isValid = true;
+    }
+    return isValid;
 };
 
 /**
@@ -63,15 +63,15 @@ Blockly.BasicCursor.prototype.validNode_ = function(node) {
  *     valid parents.
  * @private
  */
-Blockly.BasicCursor.prototype.findSiblingOrParent_ = function(node) {
-  if (!node) {
-    return null;
-  }
-  var nextNode = node.next();
-  if (nextNode) {
-    return nextNode;
-  }
-  return this.findSiblingOrParent_(node.out());
+Blockly.BasicCursor.prototype.findSiblingOrParent_ = function (node) {
+    if (!node) {
+        return null;
+    }
+    var nextNode = node.next();
+    if (nextNode) {
+        return nextNode;
+    }
+    return this.findSiblingOrParent_(node.out());
 };
 
 /**
@@ -82,23 +82,23 @@ Blockly.BasicCursor.prototype.findSiblingOrParent_ = function(node) {
  * @return {Blockly.ASTNode} The next node in the traversal.
  * @private
  */
-Blockly.BasicCursor.prototype.getNextNode_ = function(node) {
-  if (!node) {
+Blockly.BasicCursor.prototype.getNextNode_ = function (node) {
+    if (!node) {
+        return null;
+    }
+    var newNode = node.in() || node.next();
+    if (this.validNode_(newNode)) {
+        return newNode;
+    } else if (newNode) {
+        return this.getNextNode_(newNode);
+    }
+    var siblingOrParent = this.findSiblingOrParent_(node.out());
+    if (this.validNode_(siblingOrParent)) {
+        return siblingOrParent;
+    } else if (siblingOrParent) {
+        return this.getNextNode_(siblingOrParent);
+    }
     return null;
-  }
-  var newNode = node.in() || node.next();
-  if (this.validNode_(newNode)) {
-    return newNode;
-  } else if (newNode) {
-    return this.getNextNode_(newNode);
-  }
-  var siblingOrParent = this.findSiblingOrParent_(node.out());
-  if (this.validNode_(siblingOrParent)) {
-    return siblingOrParent;
-  } else if (siblingOrParent) {
-    return this.getNextNode_(siblingOrParent);
-  }
-  return null;
 };
 
 /**
@@ -108,15 +108,15 @@ Blockly.BasicCursor.prototype.getNextNode_ = function(node) {
  *     if no child exists.
  * @private
  */
-Blockly.BasicCursor.prototype.getRightMostChild_ = function(node) {
-  if (!node.in()) {
-    return node;
-  }
-  var newNode = node.in();
-  while (newNode.next()) {
-    newNode = newNode.next();
-  }
-  return this.getRightMostChild_(newNode);
+Blockly.BasicCursor.prototype.getRightMostChild_ = function (node) {
+    if (!node.in()) {
+        return node;
+    }
+    var newNode = node.in();
+    while (newNode.next()) {
+        newNode = newNode.next();
+    }
+    return this.getRightMostChild_(newNode);
 
 };
 
@@ -129,23 +129,23 @@ Blockly.BasicCursor.prototype.getRightMostChild_ = function(node) {
  *     previous node exists.
  * @private
  */
-Blockly.BasicCursor.prototype.getPreviousNode_ = function(node) {
-  if (!node) {
-    return null;
-  }
-  var newNode = node.prev();
+Blockly.BasicCursor.prototype.getPreviousNode_ = function (node) {
+    if (!node) {
+        return null;
+    }
+    var newNode = node.prev();
 
-  if (newNode) {
-    newNode = this.getRightMostChild_(newNode);
-  } else {
-    newNode = node.out();
-  }
-  if (this.validNode_(newNode)) {
-    return newNode;
-  } else if (newNode) {
-    return this.getPreviousNode_(newNode);
-  }
-  return null;
+    if (newNode) {
+        newNode = this.getRightMostChild_(newNode);
+    } else {
+        newNode = node.out();
+    }
+    if (this.validNode_(newNode)) {
+        return newNode;
+    } else if (newNode) {
+        return this.getPreviousNode_(newNode);
+    }
+    return null;
 };
 
 /**
@@ -154,17 +154,17 @@ Blockly.BasicCursor.prototype.getPreviousNode_ = function(node) {
  *     not set or there is no next value.
  * @override
  */
-Blockly.BasicCursor.prototype.next = function() {
-  var curNode = this.getCurNode();
-  if (!curNode) {
-    return null;
-  }
-  var newNode = this.getNextNode_(curNode);
+Blockly.BasicCursor.prototype.next = function () {
+    var curNode = this.getCurNode();
+    if (!curNode) {
+        return null;
+    }
+    var newNode = this.getNextNode_(curNode);
 
-  if (newNode) {
-    this.setCurNode(newNode);
-  }
-  return newNode;
+    if (newNode) {
+        this.setCurNode(newNode);
+    }
+    return newNode;
 };
 
 /**
@@ -174,8 +174,8 @@ Blockly.BasicCursor.prototype.next = function() {
  *     not set or there is no next value.
  * @override
  */
-Blockly.BasicCursor.prototype.in = function() {
-  return this.next();
+Blockly.BasicCursor.prototype.in = function () {
+    return this.next();
 };
 
 /**
@@ -184,17 +184,17 @@ Blockly.BasicCursor.prototype.in = function() {
  *     is not set or there is no previous value.
  * @override
  */
-Blockly.BasicCursor.prototype.prev = function() {
-  var curNode = this.getCurNode();
-  if (!curNode) {
-    return null;
-  }
-  var newNode = this.getPreviousNode_(curNode);
-  
-  if (newNode) {
-    this.setCurNode(newNode);
-  }
-  return newNode;
+Blockly.BasicCursor.prototype.prev = function () {
+    var curNode = this.getCurNode();
+    if (!curNode) {
+        return null;
+    }
+    var newNode = this.getPreviousNode_(curNode);
+
+    if (newNode) {
+        this.setCurNode(newNode);
+    }
+    return newNode;
 };
 
 /**
@@ -204,6 +204,6 @@ Blockly.BasicCursor.prototype.prev = function() {
  *     not set or there is no previous value.
  * @override
  */
-Blockly.BasicCursor.prototype.out = function() {
-  return this.prev();
+Blockly.BasicCursor.prototype.out = function () {
+    return this.prev();
 };

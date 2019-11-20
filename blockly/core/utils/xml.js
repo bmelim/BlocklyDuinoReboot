@@ -40,8 +40,8 @@ Blockly.utils.xml.NAME_SPACE = 'https://developers.google.com/blockly/xml';
  * @return {!Document} The document object.
  * @public
  */
-Blockly.utils.xml.document = function() {
-  return document;
+Blockly.utils.xml.document = function () {
+    return document;
 };
 
 /**
@@ -50,9 +50,9 @@ Blockly.utils.xml.document = function() {
  * @return {!Element} New DOM element.
  * @public
  */
-Blockly.utils.xml.createElement = function(tagName) {
-  return Blockly.utils.xml.document().createElementNS(
-      Blockly.utils.xml.NAME_SPACE, tagName);
+Blockly.utils.xml.createElement = function (tagName) {
+    return Blockly.utils.xml.document().createElementNS(
+            Blockly.utils.xml.NAME_SPACE, tagName);
 };
 
 /**
@@ -61,8 +61,8 @@ Blockly.utils.xml.createElement = function(tagName) {
  * @return {!Node} New DOM node.
  * @public
  */
-Blockly.utils.xml.createTextNode = function(text) {
-  return Blockly.utils.xml.document().createTextNode(text);
+Blockly.utils.xml.createTextNode = function (text) {
+    return Blockly.utils.xml.document().createTextNode(text);
 };
 
 /**
@@ -72,9 +72,9 @@ Blockly.utils.xml.createTextNode = function(text) {
  * @throws if XML doesn't parse.
  * @public
  */
-Blockly.utils.xml.textToDomDocument = function(text) {
-  var oParser = new DOMParser();
-  return oParser.parseFromString(text, 'text/xml');
+Blockly.utils.xml.textToDomDocument = function (text) {
+    var oParser = new DOMParser();
+    return oParser.parseFromString(text, 'text/xml');
 };
 
 /**
@@ -84,7 +84,7 @@ Blockly.utils.xml.textToDomDocument = function(text) {
  * @return {string} Text representation.
  * @public
  */
-Blockly.utils.xml.domToText = function(dom) {
-  var oSerializer = new XMLSerializer();
-  return oSerializer.serializeToString(dom);
+Blockly.utils.xml.domToText = function (dom) {
+    var oSerializer = new XMLSerializer();
+    return oSerializer.serializeToString(dom);
 };

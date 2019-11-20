@@ -35,10 +35,10 @@ var BlocklyDuino = {};
  * Lookup for names of supported languages.	 Keys should be in ISO 639 format.
  */
 BlocklyDuino.LANGUAGE_NAME = {
-  'de': 'Deutsch',
-  'en': 'English',
-  'fr': 'Français',
-  'ja': '日本語'
+    'de': 'Deutsch',
+    'en': 'English',
+    'fr': 'Français',
+    'ja': '日本語'
 };
 
 /**
@@ -54,21 +54,37 @@ BlocklyDuino.workspace = null;
 
 /**
  * Change theme and color, useful for disabled people
+ * DO NOT MODIFY OR MOVE, needed by intialisation
  */
-function changeTheme() {
-  var theme = document.getElementById('themeChanger');
-  if (theme.value === "Modern") {
-	Blockly.getMainWorkspace().setTheme(Blockly.Themes.Modern);
-  } else if (theme.value === "Dark") {
-	Blockly.getMainWorkspace().setTheme(Blockly.Themes.Dark);
-  } else if (theme.value === "HighContrast") {
-	Blockly.getMainWorkspace().setTheme(Blockly.Themes.HighContrast);
-  } else if (theme.value === "blackWhite") {
-	Blockly.getMainWorkspace().setTheme(Blockly.Themes.blackWhite);
-  } else {
-	Blockly.getMainWorkspace().setTheme(Blockly.Themes.Classic);
-  }
+BlocklyDuino.changeTheme = function () {
+
+    var theme = document.getElementById('themeMenu');
+    var newTheme = encodeURIComponent(
+            themeMenu.options[themeMenu.selectedIndex].value);
+    var search = window.location.search;
+    if (search.length <= 1) {
+        search = '?theme=' + newTheme;
+    } else if (search.match(/[?&]theme=[^&]*/)) {
+        search = search.replace(/([?&]theme=)[^&]*/, '$1' + newTheme);
+    } else {
+        search = search.replace(/\?/, '?theme=' + newTheme + '&');
+    }
+    if (theme.value === "Modern") {
+        Blockly.getMainWorkspace().setTheme(Blockly.Themes.Modern);
+    } else if (theme.value === "Dark") {
+        Blockly.getMainWorkspace().setTheme(Blockly.Themes.Dark);
+    } else if (theme.value === "HighContrast") {
+        Blockly.getMainWorkspace().setTheme(Blockly.Themes.HighContrast);
+    } else if (theme.value === "blackWhite") {
+        Blockly.getMainWorkspace().setTheme(Blockly.Themes.blackWhite);
+    } else {
+        Blockly.getMainWorkspace().setTheme(Blockly.Themes.Classic);
+    }
+
+    window.location = window.location.protocol + '//' +
+            window.location.host + window.location.pathname + search;
 };
+
 /**
  * Extracts a parameter from the URL.
  * If the parameter is absent default_value is returned.
@@ -76,102 +92,102 @@ function changeTheme() {
  * @param {string} defaultValue Value to return if parameter not found.
  * @return {string} The parameter value or the default value if not found.
  */
-BlocklyDuino.getStringParamFromUrl = function(name, defaultValue) {
-  var val = location.search.match(new RegExp('[?&]' + name + '=([^&]+)'));
-  return val ? decodeURIComponent(val[1].replace(/\+/g, '%20')) : defaultValue;
+BlocklyDuino.getStringParamFromUrl = function (name, defaultValue) {
+    var val = location.search.match(new RegExp('[?&]' + name + '=([^&]+)'));
+    return val ? decodeURIComponent(val[1].replace(/\+/g, '%20')) : defaultValue;
 };
 
 /**
  * Get the language of this user from the URL.
  * @return {string} User's language.
  */
-BlocklyDuino.getLang = function() {
-  var lang = BlocklyDuino.getStringParamFromUrl('lang', '');
-  if (BlocklyDuino.LANGUAGE_NAME[lang] === undefined) {
-	// Default to English.
-	lang = 'en';
-  }
-  return lang;
+BlocklyDuino.getLang = function () {
+    var lang = BlocklyDuino.getStringParamFromUrl('lang', '');
+    if (BlocklyDuino.LANGUAGE_NAME[lang] === undefined) {
+        // Default to English.
+        lang = 'en';
+    }
+    return lang;
 };
 
 /**
  * Get the theme of this workspace from the URL.
  * @return {string} User's theme.
  */
-BlocklyDuino.getTheme = function() {
-  var theme = BlocklyDuino.getStringParamFromUrl('theme', '');
-  if (BlocklyDuino.LANGUAGE_NAME[theme] === undefined) {
-	// Default to English.
-	theme = 'blocklyModern';
-  }
-  return theme;
+BlocklyDuino.getTheme = function () {
+    var theme = BlocklyDuino.getStringParamFromUrl('theme', '');
+    if (BlocklyDuino.LANGUAGE_NAME[theme] === undefined) {
+        // Default to English.
+        theme = 'Modern';
+    }
+    return theme;
 };
 
 /**
  * Is the current language (BlocklyDuino.LANG) an RTL language?
  * @return {boolean} True if RTL, false if LTR.
  */
-BlocklyDuino.isRtl = function() {
-  return BlocklyDuino.LANGUAGE_RTL.indexOf(BlocklyDuino.LANG) != -1;
+BlocklyDuino.isRtl = function () {
+    return BlocklyDuino.LANGUAGE_RTL.indexOf(BlocklyDuino.LANG) != -1;
 };
 
 /**
  * Load blocks saved on App Engine Storage or in session/local storage.
  * @param {string} defaultXml Text representation of default blocks.
  */
-BlocklyDuino.loadBlocks = function(defaultXml) {
-  try {
-	var loadOnce = window.sessionStorage.loadOnceBlocks;
-  } catch(e) {
-	// Firefox sometimes throws a SecurityError when accessing sessionStorage.
-	// Restarting Firefox fixes this, so it looks like a bug.
-	var loadOnce = null;
-  }
-  if ('BlocklyStorage' in window && window.location.hash.length > 1) {
-	// An href with #key trigers an AJAX call to retrieve saved blocks.
-	BlocklyStorage.retrieveXml(window.location.hash.substring(1));
-  } else if (loadOnce) {
-	// Language switching stores the blocks during the reload.
-	delete window.sessionStorage.loadOnceBlocks;
-	var xml = Blockly.Xml.textToDom(loadOnce);
-	Blockly.Xml.domToWorkspace(xml, BlocklyDuino.workspace);
-  } else if (defaultXml) {
-	// Load the editor with default starting blocks.
-	var xml = Blockly.Xml.textToDom(defaultXml);
-	Blockly.Xml.domToWorkspace(xml, BlocklyDuino.workspace);
-  } else if ('BlocklyStorage' in window) {
-	// Restore saved blocks in a separate thread so that subsequent
-	// initialization is not affected from a failed load.
-	window.setTimeout(BlocklyStorage.restoreBlocks, 0);
-  }
+BlocklyDuino.loadBlocks = function (defaultXml) {
+    try {
+        var loadOnce = window.sessionStorage.loadOnceBlocks;
+    } catch (e) {
+        // Firefox sometimes throws a SecurityError when accessing sessionStorage.
+        // Restarting Firefox fixes this, so it looks like a bug.
+        var loadOnce = null;
+    }
+    if ('BlocklyStorage' in window && window.location.hash.length > 1) {
+        // An href with #key trigers an AJAX call to retrieve saved blocks.
+        BlocklyStorage.retrieveXml(window.location.hash.substring(1));
+    } else if (loadOnce) {
+        // Language switching stores the blocks during the reload.
+        delete window.sessionStorage.loadOnceBlocks;
+        var xml = Blockly.Xml.textToDom(loadOnce);
+        Blockly.Xml.domToWorkspace(xml, BlocklyDuino.workspace);
+    } else if (defaultXml) {
+        // Load the editor with default starting blocks.
+        var xml = Blockly.Xml.textToDom(defaultXml);
+        Blockly.Xml.domToWorkspace(xml, BlocklyDuino.workspace);
+    } else if ('BlocklyStorage' in window) {
+        // Restore saved blocks in a separate thread so that subsequent
+        // initialization is not affected from a failed load.
+        window.setTimeout(BlocklyStorage.restoreBlocks, 0);
+    }
 };
 
 /**
  * Save the blocks and reload with a different language.
  */
-BlocklyDuino.changeLanguage = function() {
-  // Store the blocks for the duration of the reload.
-  // MSIE 11 does not support sessionStorage on file:// URLs.
-  if (window.sessionStorage) {
-	var xml = Blockly.Xml.workspaceToDom(BlocklyDuino.workspace);
-	var text = Blockly.Xml.domToText(xml);
-	window.sessionStorage.loadOnceBlocks = text;
-  }
+BlocklyDuino.changeLanguage = function () {
+    // Store the blocks for the duration of the reload.
+    // MSIE 11 does not support sessionStorage on file:// URLs.
+    if (window.sessionStorage) {
+        var xml = Blockly.Xml.workspaceToDom(BlocklyDuino.workspace);
+        var text = Blockly.Xml.domToText(xml);
+        window.sessionStorage.loadOnceBlocks = text;
+    }
 
-  var languageMenu = document.getElementById('languageMenu');
-  var newLang = encodeURIComponent(
-	  languageMenu.options[languageMenu.selectedIndex].value);
-  var search = window.location.search;
-  if (search.length <= 1) {
-	search = '?lang=' + newLang;
-  } else if (search.match(/[?&]lang=[^&]*/)) {
-	search = search.replace(/([?&]lang=)[^&]*/, '$1' + newLang);
-  } else {
-	search = search.replace(/\?/, '?lang=' + newLang + '&');
-  }
+    var languageMenu = document.getElementById('languageMenu');
+    var newLang = encodeURIComponent(
+            languageMenu.options[languageMenu.selectedIndex].value);
+    var search = window.location.search;
+    if (search.length <= 1) {
+        search = '?lang=' + newLang;
+    } else if (search.match(/[?&]lang=[^&]*/)) {
+        search = search.replace(/([?&]lang=)[^&]*/, '$1' + newLang);
+    } else {
+        search = search.replace(/\?/, '?lang=' + newLang + '&');
+    }
 
-  window.location = window.location.protocol + '//' +
-	  window.location.host + window.location.pathname + search;
+    window.location = window.location.protocol + '//' +
+            window.location.host + window.location.pathname + search;
 };
 
 /**
@@ -180,21 +196,21 @@ BlocklyDuino.changeLanguage = function() {
  * @param {!Element|string} el Button element or ID thereof.
  * @param {!Function} func Event handler to bind.
  */
-BlocklyDuino.bindClick = function(el, func) {
-  if (typeof el == 'string') {
-	el = document.getElementById(el);
-  }
-  el.addEventListener('click', func, true);
-  el.addEventListener('touchend', func, true);
+BlocklyDuino.bindClick = function (el, func) {
+    if (typeof el == 'string') {
+        el = document.getElementById(el);
+    }
+    el.addEventListener('click', func, true);
+    el.addEventListener('touchend', func, true);
 };
 
 /**
  * Load the Prettify CSS and JavaScript.
  */
-BlocklyDuino.importPrettify = function() {
-  var script = document.createElement('script');
-  script.setAttribute('src', './js/addon/run_prettify.js');
-  document.head.appendChild(script);
+BlocklyDuino.importPrettify = function () {
+    var script = document.createElement('script');
+    script.setAttribute('src', './js/addon/run_prettify.js');
+    document.head.appendChild(script);
 };
 
 /**
@@ -203,22 +219,22 @@ BlocklyDuino.importPrettify = function() {
  * @return {!Object} Contains height, width, x, and y properties.
  * @private
  */
-BlocklyDuino.getBBox_ = function(element) {
-  var height = element.offsetHeight;
-  var width = element.offsetWidth;
-  var x = 0;
-  var y = 0;
-  do {
-	x += element.offsetLeft;
-	y += element.offsetTop;
-	element = element.offsetParent;
-  } while (element);
-  return {
-	height: height,
-	width: width,
-	x: x,
-	y: y
-  };
+BlocklyDuino.getBBox_ = function (element) {
+    var height = element.offsetHeight;
+    var width = element.offsetWidth;
+    var x = 0;
+    var y = 0;
+    do {
+        x += element.offsetLeft;
+        y += element.offsetTop;
+        element = element.offsetParent;
+    } while (element);
+    return {
+        height: height,
+        width: width,
+        x: x,
+        y: y
+    };
 };
 
 /**
@@ -239,76 +255,76 @@ BlocklyDuino.selected = 'blocks';
  * Switch the visible pane when a tab is clicked.
  * @param {string} clickedName Name of tab clicked.
  */
-BlocklyDuino.tabClick = function(clickedName) {
-  // If the XML tab was open, save and render the content.
-  // if (document.getElementById('tab_xml').className == 'tabon') {
-	// var xmlTextarea = document.getElementById('content_xml');
-	// var xmlText = xmlTextarea.value;
-	// var xmlDom = null;
-	// try {
-	  // xmlDom = Blockly.Xml.textToDom(xmlText);
-	// } catch (e) {
-	  // var q =
-		  // window.confirm(MSG['badXml'].replace('%1', e));
-	  // if (!q) {
-		// Leave the user on the XML tab.
-		// return;
-	  // }
-	// }
-	// if (xmlDom) {
-	  // Code.workspace.clear();
-	  // Blockly.Xml.domToWorkspace(xmlDom, Code.workspace);
-	// }
-  // }
+BlocklyDuino.tabClick = function (clickedName) {
+    // If the XML tab was open, save and render the content.
+    // if (document.getElementById('tab_xml').className == 'tabon') {
+    // var xmlTextarea = document.getElementById('content_xml');
+    // var xmlText = xmlTextarea.value;
+    // var xmlDom = null;
+    // try {
+    // xmlDom = Blockly.Xml.textToDom(xmlText);
+    // } catch (e) {
+    // var q =
+    // window.confirm(MSG['badXml'].replace('%1', e));
+    // if (!q) {
+    // Leave the user on the XML tab.
+    // return;
+    // }
+    // }
+    // if (xmlDom) {
+    // Code.workspace.clear();
+    // Blockly.Xml.domToWorkspace(xmlDom, Code.workspace);
+    // }
+    // }
 
-  if (document.getElementById('tab_blocks').className == 'tabon') {
-	BlocklyDuino.workspace.setVisible(false);
-  }
-  // Deselect all tabs and hide all panes.
-  for (var i = 0; i < BlocklyDuino.TABS_.length; i++) {
-	var name = BlocklyDuino.TABS_[i];
-	document.getElementById('tab_' + name).className = 'taboff';
-	document.getElementById('content_' + name).style.visibility = 'hidden';
-  }
+    if (document.getElementById('tab_blocks').className == 'tabon') {
+        BlocklyDuino.workspace.setVisible(false);
+    }
+    // Deselect all tabs and hide all panes.
+    for (var i = 0; i < BlocklyDuino.TABS_.length; i++) {
+        var name = BlocklyDuino.TABS_[i];
+        document.getElementById('tab_' + name).className = 'taboff';
+        document.getElementById('content_' + name).style.visibility = 'hidden';
+    }
 
-  // Select the active tab.
-  BlocklyDuino.selected = clickedName;
-  document.getElementById('tab_' + clickedName).className = 'tabon';
-  // Show the selected pane.
-  document.getElementById('content_' + clickedName).style.visibility =
-	  'visible';
-  BlocklyDuino.renderContent();
-  if (clickedName == 'blocks') {
-	BlocklyDuino.workspace.setVisible(true);
-  }
-  Blockly.svgResize(BlocklyDuino.workspace);
+    // Select the active tab.
+    BlocklyDuino.selected = clickedName;
+    document.getElementById('tab_' + clickedName).className = 'tabon';
+    // Show the selected pane.
+    document.getElementById('content_' + clickedName).style.visibility =
+            'visible';
+    BlocklyDuino.renderContent();
+    if (clickedName == 'blocks') {
+        BlocklyDuino.workspace.setVisible(true);
+    }
+    Blockly.svgResize(BlocklyDuino.workspace);
 };
 
 /**
  * Populate the currently selected pane with content generated from the blocks.
  */
-BlocklyDuino.renderContent = function() {
-  var content = document.getElementById('content_' + BlocklyDuino.selected);
-  // Initialize the pane.
-  if (content.id == 'content_xml') {
-	var xmlTextarea = document.getElementById('content_xml');
-	var xmlDom = Blockly.Xml.workspaceToDom(BlocklyDuino.workspace);
-	var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-	xmlTextarea.value = xmlText;
-	xmlTextarea.focus();
-  } else if (content.id == 'content_arduino') {
-	BlocklyDuino.attemptCodeGeneration(Blockly.Arduino, 'cpp');
-  }
+BlocklyDuino.renderContent = function () {
+    var content = document.getElementById('content_' + BlocklyDuino.selected);
+    // Initialize the pane.
+    if (content.id == 'content_xml') {
+        var xmlTextarea = document.getElementById('content_xml');
+        var xmlDom = Blockly.Xml.workspaceToDom(BlocklyDuino.workspace);
+        var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+        xmlTextarea.value = xmlText;
+        xmlTextarea.focus();
+    } else if (content.id == 'content_arduino') {
+        BlocklyDuino.attemptCodeGeneration(Blockly.Arduino, 'cpp');
+    }
 };
 
 
 // This function will escape html passed to it.
 // It is needed for correct pretification of code like #include <SoftwareSerial.h>
 function htmlEscape(s) {
-return s
-  .replace(/&/g, '&amp;')
-  .replace(/</g, '&lt;')
-  .replace(/>/g, '&gt;');
+    return s
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
 }
 
 /**
@@ -316,229 +332,247 @@ return s
  * @param generator {!Blockly.Generator} The generator to use.
  * @param prettyPrintType {string} The file type key for the pretty printer.
  */
-BlocklyDuino.attemptCodeGeneration = function(generator, prettyPrintType) {
-  var content = document.getElementById('content_' + BlocklyDuino.selected);
-  content.textContent = '';
-  if (BlocklyDuino.checkAllGeneratorFunctionsDefined(generator)) {
-	var code = generator.workspaceToCode(BlocklyDuino.workspace);
+BlocklyDuino.attemptCodeGeneration = function (generator, prettyPrintType) {
+    var content = document.getElementById('content_' + BlocklyDuino.selected);
+    content.textContent = '';
+    if (BlocklyDuino.checkAllGeneratorFunctionsDefined(generator)) {
+        var code = generator.workspaceToCode(BlocklyDuino.workspace);
 
-	content.textContent = code;
-	if (typeof PR.prettyPrintOne == 'function') {
-	  code = content.textContent;
-	  code = PR.prettyPrintOne(htmlEscape(code), prettyPrintType);
-	  content.innerHTML = code;
-	}
-  }
+        content.textContent = code;
+        if (typeof PR.prettyPrintOne == 'function') {
+            code = content.textContent;
+            code = PR.prettyPrintOne(htmlEscape(code), prettyPrintType);
+            content.innerHTML = code;
+        }
+    }
 };
 
 /**
  * Check whether all blocks in use have generator functions.
  * @param generator {!Blockly.Generator} The generator to use.
  */
-BlocklyDuino.checkAllGeneratorFunctionsDefined = function(generator) {
-  var blocks = BlocklyDuino.workspace.getAllBlocks(false);
-  var missingBlockGenerators = [];
-  for (var i = 0; i < blocks.length; i++) {
-	var blockType = blocks[i].type;
-	if (!generator[blockType]) {
-	  if (missingBlockGenerators.indexOf(blockType) === -1) {
-		missingBlockGenerators.push(blockType);
-	  }
-	}
-  }
+BlocklyDuino.checkAllGeneratorFunctionsDefined = function (generator) {
+    var blocks = BlocklyDuino.workspace.getAllBlocks(false);
+    var missingBlockGenerators = [];
+    for (var i = 0; i < blocks.length; i++) {
+        var blockType = blocks[i].type;
+        if (!generator[blockType]) {
+            if (missingBlockGenerators.indexOf(blockType) === -1) {
+                missingBlockGenerators.push(blockType);
+            }
+        }
+    }
 
-  var valid = missingBlockGenerators.length == 0;
-  if (!valid) {
-	var msg = 'The generator code for the following blocks not specified for '
-		+ generator.name_ + ':\n - ' + missingBlockGenerators.join('\n - ');
-	Blockly.alert(msg);	 // Assuming synchronous. No callback.
-  }
-  return valid;
+    var valid = missingBlockGenerators.length == 0;
+    if (!valid) {
+        var msg = 'The generator code for the following blocks not specified for '
+                + generator.name_ + ':\n - ' + missingBlockGenerators.join('\n - ');
+        Blockly.alert(msg);	 // Assuming synchronous. No callback.
+    }
+    return valid;
 };
 
 /**
  * Initialize Blockly.	Called on page load.
  */
-BlocklyDuino.init = function() {
-  BlocklyDuino.initLanguage();
-  
-  var rtl = BlocklyDuino.isRtl();
-  var container = document.getElementById('content_area');
-  var onresize = function(e) {
-	var bBox = BlocklyDuino.getBBox_(container);
-	for (var i = 0; i < BlocklyDuino.TABS_.length; i++) {
-	  var el = document.getElementById('content_' + BlocklyDuino.TABS_[i]);
-	  el.style.top = bBox.y + 'px';
-	  el.style.left = bBox.x + 'px';
-	  // Height and width need to be set, read back, then set again to
-	  // compensate for scrollbars.
-	  el.style.height = bBox.height + 'px';
-	  el.style.height = (2 * bBox.height - el.offsetHeight) + 'px';
-	  el.style.width = bBox.width + 'px';
-	  el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
-	}
-	// Make the 'Blocks' tab line up with the toolbox.
-	if (BlocklyDuino.workspace && BlocklyDuino.workspace.toolbox_.width) {
-	  document.getElementById('tab_blocks').style.minWidth =
-		  (BlocklyDuino.workspace.toolbox_.width - 38) + 'px';
-		  // Account for the 19 pixel margin and on each side.
-	}
-  };
-  window.addEventListener('resize', onresize, false);
+BlocklyDuino.init = function () {
+    BlocklyDuino.initLanguage();
+    // accessibility
+    BlocklyDuino.initKeyMap();
+    var rtl = BlocklyDuino.isRtl();
+    var container = document.getElementById('content_area');
+    var onresize = function (e) {
+        var bBox = BlocklyDuino.getBBox_(container);
+        for (var i = 0; i < BlocklyDuino.TABS_.length; i++) {
+            var el = document.getElementById('content_' + BlocklyDuino.TABS_[i]);
+            el.style.top = bBox.y + 'px';
+            el.style.left = bBox.x + 'px';
+            // Height and width need to be set, read back, then set again to
+            // compensate for scrollbars.
+            el.style.height = bBox.height + 'px';
+            el.style.height = (2 * bBox.height - el.offsetHeight) + 'px';
+            el.style.width = bBox.width + 'px';
+            el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
+        }
+        // Make the 'Blocks' tab line up with the toolbox.
+        if (BlocklyDuino.workspace && BlocklyDuino.workspace.toolbox_.width) {
+            document.getElementById('tab_blocks').style.minWidth =
+                    (BlocklyDuino.workspace.toolbox_.width - 38) + 'px';
+            // Account for the 19 pixel margin and on each side.
+        }
+    };
+    window.addEventListener('resize', onresize, false);
 
-  // The toolbox XML specifies each category name using Blockly's messaging
-  // format (eg. `<category name="%{BKY_CATLOGIC}">`).
-  // These message keys need to be defined in `Blockly.Msg` in order to
-  // be decoded by the library. Therefore, we'll use the `MSG` dictionary that's
-  // been defined for each language to import each category name message
-  // into `Blockly.Msg`.
-  // TODO: Clean up the message files so this is done explicitly instead of
-  // through this for-loop.
-  for (var messageKey in MSG) {
-	if (messageKey.indexOf('cat') == 0) {
-	  Blockly.Msg[messageKey.toUpperCase()] = MSG[messageKey];
-	}
-  }
+    // The toolbox XML specifies each category name using Blockly's messaging
+    // format (eg. `<category name="%{BKY_CATLOGIC}">`).
+    // These message keys need to be defined in `Blockly.Msg` in order to
+    // be decoded by the library. Therefore, we'll use the `MSG` dictionary that's
+    // been defined for each language to import each category name message
+    // into `Blockly.Msg`.
+    // TODO: Clean up the message files so this is done explicitly instead of
+    // through this for-loop.
+    for (var messageKey in MSG) {
+        if (messageKey.indexOf('cat') == 0) {
+            Blockly.Msg[messageKey.toUpperCase()] = MSG[messageKey];
+        }
+    }
 
-  // Construct the toolbox XML, replacing translated variable names.
-  var toolboxText = document.getElementById('blocklyduinoToolbox').outerHTML;
-  toolboxText = toolboxText.replace(/(^|[^%]){(\w+)}/g,
-	  function(m, p1, p2) {return p1 + MSG[p2];});
-  var toolboxXml = Blockly.Xml.textToDom(toolboxText);
+    // Construct the toolbox XML, replacing translated variable names.
+    var toolboxText = document.getElementById('blocklyduinoToolbox').outerHTML;
+    toolboxText = toolboxText.replace(/(^|[^%]){(\w+)}/g,
+            function (m, p1, p2) {
+                return p1 + MSG[p2];
+            });
+    var toolboxXml = Blockly.Xml.textToDom(toolboxText);
 
-  BlocklyDuino.workspace = Blockly.inject('content_blocks',
-		{
-		grid:
-		  {spacing: 25,
-		   length: 3,
-		   colour: '#ccc',
-		   snap: true
-		   },
-		media: '../blockly/media/',
-		sounds: true,
-		rtl: rtl,
-		toolbox: toolboxXml,
-		trashcan: true,
-		zoom:
-		   {controls: true,
-			wheel: true,
-			startScale: 1.0,
-			maxScale: 5,
-			minScale: 0.2,
-			scaleSpeed: 1.2
-			},
-		}
-	);
+    BlocklyDuino.workspace = Blockly.inject('content_blocks',
+            {
+                grid:
+                        {spacing: 25,
+                            length: 3,
+                            colour: '#ccc',
+                            snap: true
+                        },
+                media: '../blockly/media/',
+                sounds: true,
+                rtl: rtl,
+                toolbox: toolboxXml,
+                trashcan: true,
+                zoom:
+                        {controls: true,
+                            wheel: true,
+                            startScale: 1.0,
+                            maxScale: 5,
+                            minScale: 0.2,
+                            scaleSpeed: 1.2
+                        },
+            }
+    );
 
-  // Add to reserved word list: Local variables in execution environment (runJS)
-  // and the infinite loop detection function.
-  // Blockly.JavaScript.addReservedWords('code,timeouts,checkTimeout');
+    // Add to reserved word list: Local variables in execution environment (runJS)
+    // and the infinite loop detection function.
+    // Blockly.JavaScript.addReservedWords('code,timeouts,checkTimeout');
 
-  BlocklyDuino.loadBlocks('');
+    BlocklyDuino.loadBlocks('');
 
-  if ('BlocklyStorage' in window) {
-	// Hook a save function onto unload.
-	BlocklyStorage.backupOnUnload(BlocklyDuino.workspace);
-  }
+    if ('BlocklyStorage' in window) {
+        // Hook a save function onto unload.
+        BlocklyStorage.backupOnUnload(BlocklyDuino.workspace);
+    }
 
-  BlocklyDuino.tabClick(BlocklyDuino.selected);
+    BlocklyDuino.tabClick(BlocklyDuino.selected);
 
-  BlocklyDuino.bindClick('uploadButton',
-	  function() {BlocklyDuino.uploadClick();});
-  BlocklyDuino.bindClick('resetButton',
-	  function() {BlocklyDuino.resetClick();});
-  BlocklyDuino.bindClick('trashButton',
-	  function() {BlocklyDuino.discard(); BlocklyDuino.renderContent();});
-  BlocklyDuino.bindClick('saveCodeButton',
-	  function() {BlocklyDuino.saveCode();});
-  BlocklyDuino.bindClick('saveXMLButton',
-	  function() {BlocklyDuino.saveXML();});
+    BlocklyDuino.bindClick('uploadButton',
+            function () {
+                BlocklyDuino.uploadClick();
+            });
+    BlocklyDuino.bindClick('resetButton',
+            function () {
+                BlocklyDuino.resetClick();
+            });
+    BlocklyDuino.bindClick('trashButton',
+            function () {
+                BlocklyDuino.discard();
+                BlocklyDuino.renderContent();
+            });
+    BlocklyDuino.bindClick('saveCodeButton',
+            function () {
+                BlocklyDuino.saveCode();
+            });
+    BlocklyDuino.bindClick('saveXMLButton',
+            function () {
+                BlocklyDuino.saveXML();
+            });
+    BlocklyDuino.bindClick('openKeyMapping',
+            function () {
+                BlocklyDuino.openKeyMappingModal();
+            });
 
-  for (var i = 0; i < BlocklyDuino.TABS_.length; i++) {
-	var name = BlocklyDuino.TABS_[i];
-	BlocklyDuino.bindClick('tab_' + name,
-		function(name_) {return function() {BlocklyDuino.tabClick(name_);};}(name));
-  }
-  onresize();
-  //change theme
-  var themeName = BlocklyDuino.getTheme();
-  if (themeName === 'undefined') {
-	changeTheme();
-  } else Blockly.getMainWorkspace().setTheme(Blockly.Themes.themeName);
-  Blockly.svgResize(BlocklyDuino.workspace);
+    for (var i = 0; i < BlocklyDuino.TABS_.length; i++) {
+        var name = BlocklyDuino.TABS_[i];
+        BlocklyDuino.bindClick('tab_' + name,
+                function (name_) {
+                    return function () {
+                        BlocklyDuino.tabClick(name_);
+                    };
+                }(name));
+    }
+    onresize();
 
-  // Lazy-load the syntax-highlighting.
-  window.setTimeout(BlocklyDuino.importPrettify, 1);
+    Blockly.svgResize(BlocklyDuino.workspace);
+
+    // Lazy-load the syntax-highlighting.
+    window.setTimeout(BlocklyDuino.importPrettify, 1);
 };
 
 /**
  * Initialize the page language.
  */
-BlocklyDuino.initLanguage = function() {
-  // Set the HTML's language and direction.
-  var rtl = BlocklyDuino.isRtl();
-  document.dir = rtl ? 'rtl' : 'ltr';
-  document.head.parentElement.setAttribute('lang', BlocklyDuino.LANG);
+BlocklyDuino.initLanguage = function () {
+    // Set the HTML's language and direction.
+    var rtl = BlocklyDuino.isRtl();
+    document.dir = rtl ? 'rtl' : 'ltr';
+    document.head.parentElement.setAttribute('lang', BlocklyDuino.LANG);
 
-  // Sort languages alphabetically.
-  var languages = [];
-  for (var lang in BlocklyDuino.LANGUAGE_NAME) {
-	languages.push([BlocklyDuino.LANGUAGE_NAME[lang], lang]);
-  }
-  var comp = function(a, b) {
-	// Sort based on first argument ('English', 'Русский', '简体字', etc).
-	if (a[0] > b[0]) return 1;
-	if (a[0] < b[0]) return -1;
-	return 0;
-  };
-  languages.sort(comp);
-  // Populate the language selection menu.
-  var languageMenu = document.getElementById('languageMenu');
-  languageMenu.options.length = 0;
-  for (var i = 0; i < languages.length; i++) {
-	var tuple = languages[i];
-	var lang = tuple[tuple.length - 1];
-	var option = new Option(tuple[0], lang);
-	if (lang == BlocklyDuino.LANG) {
-	  option.selected = true;
-	}
-	languageMenu.options.add(option);
-  }
-  languageMenu.addEventListener('change', BlocklyDuino.changeLanguage, true);
+    // Sort languages alphabetically.
+    var languages = [];
+    for (var lang in BlocklyDuino.LANGUAGE_NAME) {
+        languages.push([BlocklyDuino.LANGUAGE_NAME[lang], lang]);
+    }
+    var comp = function (a, b) {
+        // Sort based on first argument ('English', 'Русский', '简体字', etc).
+        if (a[0] > b[0])
+            return 1;
+        if (a[0] < b[0])
+            return -1;
+        return 0;
+    };
+    languages.sort(comp);
+    // Populate the language selection menu.
+    var languageMenu = document.getElementById('languageMenu');
+    languageMenu.options.length = 0;
+    for (var i = 0; i < languages.length; i++) {
+        var tuple = languages[i];
+        var lang = tuple[tuple.length - 1];
+        var option = new Option(tuple[0], lang);
+        if (lang == BlocklyDuino.LANG) {
+            option.selected = true;
+        }
+        languageMenu.options.add(option);
+    }
+    languageMenu.addEventListener('change', BlocklyDuino.changeLanguage, true);
 
-  // Inject language strings.
-  // document.title += ' ' + MSG['title'];
-  // document.getElementById('title').textContent = MSG['title'];
-  document.getElementById('tab_blocks').textContent = MSG['blocks'];
-
-  // document.getElementById('linkButton').title = MSG['linkTooltip'];
-  // document.getElementById('runButton').title = MSG['runTooltip'];
-  document.getElementById('trashButton').title = MSG['trashTooltip'];
-  //change Blockly title span by this one
-  document.getElementById('title2').textContent = Blockly.Msg.TITLE2;
-  //change Blockly title buttons by this one
-  document.getElementById('languageSpan').textContent = MSG['languageSpan'];
-  document.getElementById('themeSpan').textContent = MSG['themeSpan'];
-  document.getElementById('uploadButton_span').textContent = MSG['uploadButton_span'];
-  document.getElementById('resetButton_span').textContent = MSG['resetButton_span'];
-  document.getElementById('trashButton_span').textContent = MSG['trashButton_span'];
-  document.getElementById('saveCodeButton_span').textContent = MSG['saveCodeButton_span'];
-  document.getElementById('saveXMLButton_span').textContent = MSG['saveXMLButton_span'];
-  document.getElementById('loadXMLfakeButton_span').textContent = MSG['loadXMLfakeButton_span'];
+    // Inject language strings.
+    // document.title += ' ' + MSG['title'];
+    // document.getElementById('title').textContent = MSG['title'];
+    document.getElementById('tab_blocks').textContent = MSG['blocks'];
+    document.getElementById('trashButton').title = MSG['trashTooltip'];
+    //change Blockly title span by this one
+    document.getElementById('title2').textContent = Blockly.Msg.TITLE2;
+    //change Blockly title buttons by this one
+    document.getElementById('languageSpan').textContent = MSG['languageSpan'];
+    document.getElementById('themeSpan').textContent = MSG['themeSpan'];
+    document.getElementById('boardSpan').textContent = MSG['boardSpan'];
+    document.getElementById('uploadButton_span').textContent = MSG['uploadButton_span'];
+    document.getElementById('resetButton_span').textContent = MSG['resetButton_span'];
+    document.getElementById('trashButton_span').textContent = MSG['trashButton_span'];
+    document.getElementById('saveCodeButton_span').textContent = MSG['saveCodeButton_span'];
+    document.getElementById('saveXMLButton_span').textContent = MSG['saveXMLButton_span'];
+    document.getElementById('loadXMLfakeButton_span').textContent = MSG['loadXMLfakeButton_span'];
 };
 
 /**
  * Discard all blocks from the workspace.
  */
-BlocklyDuino.discard = function() {
-  var count = BlocklyDuino.workspace.getAllBlocks(false).length;
-  if (count < 2 ||
-	  window.confirm(Blockly.Msg['DELETE_ALL_BLOCKS'].replace('%1', count))) {
-	BlocklyDuino.workspace.clear();
-	if (window.location.hash) {
-	  window.location.hash = '';
-	}
-  }
+BlocklyDuino.discard = function () {
+    var count = BlocklyDuino.workspace.getAllBlocks(false).length;
+    if (count < 2 ||
+            window.confirm(Blockly.Msg['DELETE_ALL_BLOCKS'].replace('%1', count))) {
+        BlocklyDuino.workspace.clear();
+        if (window.location.hash) {
+            window.location.hash = '';
+        }
+    }
 };
 // Load the Code demo's language strings.
 // document.write('<script src="../blockly/demos/code/msg/' + Code.LANG + '.js"></script>\n');

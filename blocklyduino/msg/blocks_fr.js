@@ -1,5 +1,9 @@
 'use strict';
 
+goog.provide('Blockly.Msg.blocks_fr');
+
+goog.require('Blockly.Msg');
+
 Blockly.Msg.TITLE2 = " > programmation visuelle par blocs pour Arduino";
 
 //text in blocks

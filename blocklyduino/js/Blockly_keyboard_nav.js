@@ -4,11 +4,11 @@
  * @package
  */
 function toggleAccessibilityMode(state) {
-  if (state) {
-	Blockly.navigation.enableKeyboardAccessibility();
-  } else {
-	Blockly.navigation.disableKeyboardAccessibility();
-  }
+    if (state) {
+        Blockly.navigation.enableKeyboardAccessibility();
+    } else {
+        Blockly.navigation.disableKeyboardAccessibility();
+    }
 }
 
 /**
@@ -18,33 +18,33 @@ function toggleAccessibilityMode(state) {
  * @package
  */
 function changeCursor(cursorType) {
-  Blockly.navigation.enableKeyboardAccessibility();
-  document.getElementById('accessibilityModeCheck').checked = true;
-  document.getElementById('cursorChanger').value = cursorType;
-  var oldCurNode = Blockly.getMainWorkspace().getCursor().getCurNode();
+    Blockly.navigation.enableKeyboardAccessibility();
+    document.getElementById('accessibilityModeCheck').checked = true;
+    document.getElementById('cursorChanger').value = cursorType;
+    var oldCurNode = Blockly.getMainWorkspace().getCursor().getCurNode();
 
-  if (cursorType === "basic") {
-	Blockly.getMainWorkspace().setCursor(new Blockly.BasicCursor());
-  } else {
-	Blockly.getMainWorkspace().setCursor(new Blockly.Cursor());
-  }
-  if (oldCurNode) {
-	Blockly.getMainWorkspace().getCursor().setCurNode(oldCurNode);
-  }
-  document.activeElement.blur();
+    if (cursorType === "basic") {
+        Blockly.getMainWorkspace().setCursor(new Blockly.BasicCursor());
+    } else {
+        Blockly.getMainWorkspace().setCursor(new Blockly.Cursor());
+    }
+    if (oldCurNode) {
+        Blockly.getMainWorkspace().getCursor().setCurNode(oldCurNode);
+    }
+    document.activeElement.blur();
 }
 
-// Start key mapping demo functions
+// Start key mapping functions
 
 /**
  * Save the current key map in session storage.
  * @package
  */
 function saveKeyMap() {
-  var currentMap = Blockly.user.keyMap.getKeyMap();
-  if (sessionStorage) {
-	sessionStorage.setItem('keyMap', JSON.stringify(currentMap));
-  }
+    var currentMap = Blockly.user.keyMap.getKeyMap();
+    if (sessionStorage) {
+        sessionStorage.setItem('keyMap', JSON.stringify(currentMap));
+    }
 }
 
 /**
@@ -52,17 +52,19 @@ function saveKeyMap() {
  * @package
  */
 function restoreKeyMap() {
-  var defaultMap = Blockly.user.keyMap.map_;
-  var stringifiedMap = sessionStorage.getItem('keyMap');
-  var restoredMap = {};
-  if (sessionStorage && stringifiedMap) {
-	var keyMap = JSON.parse(stringifiedMap);
-	var keys = Object.keys(keyMap);
-	for (var i = 0, key; key = keys[i]; i++) {
-	  restoredMap[key] = Object.assign(new Blockly.Action, keyMap[key]);
-	}
-	Blockly.user.keyMap.setKeyMap(restoredMap);
-  }
+    var defaultMap = Blockly.user.keyMap.map_;
+    var stringifiedMap = sessionStorage.getItem('keyMap');
+    var restoredMap = {};
+    if (sessionStorage && stringifiedMap) {
+        var keyMap = JSON.parse(stringifiedMap);
+        var keys = Object.keys(keyMap);
+        for (var i = 0, key; key = keys[i]; i++) {
+            restoredMap[key] = Object.assign(new Blockly.Action, keyMap[key]);
+        }
+        Blockly.user.keyMap.setKeyMap(restoredMap);
+    } else {
+        Blockly.user.keyMap.setKeyMap(defaultMap);
+    }
 }
 
 /**
@@ -73,30 +75,30 @@ function restoreKeyMap() {
  * @package
  */
 function serializeKey(selectDivs) {
-  var modifiers = Blockly.utils.object.values(Blockly.user.keyMap.modifierKeys);
-  var newModifiers = [];
-  var newKeyCode = '';
-  var keyValue = selectDivs[2].value;
+    var modifiers = Blockly.utils.object.values(Blockly.user.keyMap.modifierKeys);
+    var newModifiers = [];
+    var newKeyCode = '';
+    var keyValue = selectDivs[2].value;
 
-  // Get the new modifiers from the first two dropdowns.
-  for (var i = 0; i < 2; i++) {
-	var selectDiv = selectDivs[i];
-	var key = selectDiv.value;
-	if (key !== 'None') {
-	  newModifiers.push(key);
-	}
-  }
-  // Get the key code from the last dropdown.
-  if (keyValue !== 'None') {
-	if (keyValue === 'Escape') {
-	  newKeyCode = Blockly.utils.KeyCodes.ESC;
-	} else if (keyValue === 'Enter') {
-	  newKeyCode = Blockly.utils.KeyCodes.ENTER;
-	} else {
-	  newKeyCode = keyValue.toUpperCase().charCodeAt(0);
-	}
-  }
-  return Blockly.user.keyMap.createSerializedKey(newKeyCode, newModifiers);
+    // Get the new modifiers from the first two dropdowns.
+    for (var i = 0; i < 2; i++) {
+        var selectDiv = selectDivs[i];
+        var key = selectDiv.value;
+        if (key !== 'None') {
+            newModifiers.push(key);
+        }
+    }
+    // Get the key code from the last dropdown.
+    if (keyValue !== 'None') {
+        if (keyValue === 'Escape') {
+            newKeyCode = Blockly.utils.KeyCodes.ESC;
+        } else if (keyValue === 'Enter') {
+            newKeyCode = Blockly.utils.KeyCodes.ENTER;
+        } else {
+            newKeyCode = keyValue.toUpperCase().charCodeAt(0);
+        }
+    }
+    return Blockly.user.keyMap.createSerializedKey(newKeyCode, newModifiers);
 }
 
 /**
@@ -108,11 +110,11 @@ function serializeKey(selectDivs) {
  * @package
  */
 function clearDropdown(action) {
-  var actionDiv = document.querySelectorAll('[data-actionname='+ action.name +']')[0];
-  var selectDivs = actionDiv.getElementsByTagName('select');
-  for (var i = 0, selectDiv; selectDiv = selectDivs[i]; i++) {
-	selectDiv.value = 'None';
-  }
+    var actionDiv = document.querySelectorAll('[data-actionname=' + action.name + ']')[0];
+    var selectDivs = actionDiv.getElementsByTagName('select');
+    for (var i = 0, selectDiv; selectDiv = selectDivs[i]; i++) {
+        selectDiv.value = 'None';
+    }
 }
 
 /**
@@ -123,14 +125,14 @@ function clearDropdown(action) {
  * @package
  */
 function getReadableKey(selectDivs) {
-  var readableKey = '';
+    var readableKey = '';
 
-  for (var i = 0, selectDiv; selectDiv = selectDivs[i]; i++) {
-	if (selectDiv.value !== 'None') {
-	  readableKey += selectDiv.value + ' ';
-	}
-  }
-  return readableKey;
+    for (var i = 0, selectDiv; selectDiv = selectDivs[i]; i++) {
+        if (selectDiv.value !== 'None') {
+            readableKey += selectDiv.value + ' ';
+        }
+    }
+    return readableKey;
 }
 
 /**
@@ -140,22 +142,22 @@ function getReadableKey(selectDivs) {
  * @package
  */
 function updateKey(e) {
-  var keyboardAnnouncerText = '';
-  var actionDiv = e.srcElement.parentElement;
-  var action = actionDiv.action;
-  var selectDivs = actionDiv.getElementsByTagName('select');
-  var key = serializeKey(selectDivs);
-  var oldAction = Blockly.user.keyMap.getActionByKeyCode(key);
+    var keyboardAnnouncerText = '';
+    var actionDiv = e.srcElement.parentElement;
+    var action = actionDiv.action;
+    var selectDivs = actionDiv.getElementsByTagName('select');
+    var key = serializeKey(selectDivs);
+    var oldAction = Blockly.user.keyMap.getActionByKeyCode(key);
 
-  if (oldAction) {
-	keyboardAnnouncerText += oldAction.name + ' action key was overwritten. \n';
-	clearDropdown(oldAction);
-  }
-  keyboardAnnouncerText += action.name + ' key was set to ' + getReadableKey(selectDivs);
-  document.getElementById('keyboard_announce').innerText = keyboardAnnouncerText;
-  Blockly.user.keyMap.setActionForKey(key, action);
-  saveKeyMap();
-  document.activeElement.blur();
+    if (oldAction) {
+        keyboardAnnouncerText += oldAction.name + ' action key was overwritten. \n';
+        clearDropdown(oldAction);
+    }
+    keyboardAnnouncerText += action.name + ' key was set to ' + getReadableKey(selectDivs);
+    document.getElementById('keyboard_announce').innerText = keyboardAnnouncerText;
+    Blockly.user.keyMap.setActionForKey(key, action);
+    saveKeyMap();
+    document.activeElement.blur();
 }
 
 /**
@@ -165,15 +167,15 @@ function updateKey(e) {
  * @package
  */
 function setKeyDropdown(actionKey, keyDropdown) {
-  // Strip off any modifier to just get the key code.
-  var keyCode = actionKey.match(/\d+/)[0];
-  var keyValue = String.fromCharCode(keyCode);
-  if (parseInt(keyCode) === Blockly.utils.KeyCodes.ESC) {
-	  keyValue = 'Escape';
-  } else if (parseInt(keyCode) === Blockly.utils.KeyCodes.ENTER) {
-	keyValue = 'Enter';
-  }
-  keyDropdown.value = keyValue;
+    // Strip off any modifier to just get the key code.
+    var keyCode = actionKey.match(/\d+/)[0];
+    var keyValue = String.fromCharCode(keyCode);
+    if (parseInt(keyCode) === Blockly.utils.KeyCodes.ESC) {
+        keyValue = 'Escape';
+    } else if (parseInt(keyCode) === Blockly.utils.KeyCodes.ENTER) {
+        keyValue = 'Enter';
+    }
+    keyDropdown.value = keyValue;
 }
 
 /**
@@ -184,17 +186,17 @@ function setKeyDropdown(actionKey, keyDropdown) {
  * @package
  */
 function setModifiers(actionKey, modifierDropdowns) {
-  var modifiers = Blockly.utils.object.values(Blockly.user.keyMap.modifierKeys);
-  for (var i = 0; i < 2; i++) {
-	var modifierDropdown = modifierDropdowns[i];
-	for (var j = 0, modifier; modifier = modifiers[j]; j++) {
-	  if (actionKey.indexOf(modifier) > -1) {
-		modifierDropdown.value = modifier;
-		actionKey = actionKey.replace(modifier, '');
-		break;
-	  }
-	}
-  }
+    var modifiers = Blockly.utils.object.values(Blockly.user.keyMap.modifierKeys);
+    for (var i = 0; i < 2; i++) {
+        var modifierDropdown = modifierDropdowns[i];
+        for (var j = 0, modifier; modifier = modifiers[j]; j++) {
+            if (actionKey.indexOf(modifier) > -1) {
+                modifierDropdown.value = modifier;
+                actionKey = actionKey.replace(modifier, '');
+                break;
+            }
+        }
+    }
 }
 
 /**
@@ -207,13 +209,13 @@ function setModifiers(actionKey, modifierDropdowns) {
  * @package
  */
 function setDropdowns(action, actionDiv, actionKey) {
-  var selectDivs = actionDiv.getElementsByTagName('select');
-  if (actionKey) {
-	setModifiers(actionKey, selectDivs);
-	setKeyDropdown(actionKey, selectDivs[selectDivs.length - 1]);
-  } else {
-	clearDropdown(action);
-  }
+    var selectDivs = actionDiv.getElementsByTagName('select');
+    if (actionKey) {
+        setModifiers(actionKey, selectDivs);
+        setKeyDropdown(actionKey, selectDivs[selectDivs.length - 1]);
+    } else {
+        clearDropdown(action);
+    }
 }
 
 /**
@@ -225,13 +227,13 @@ function setDropdowns(action, actionDiv, actionKey) {
  * @package
  */
 function createDropdown(action, actionDiv, keys) {
-  var select = document.createElement('select');
-  select.addEventListener('change', updateKey);
-  select.setAttribute('aria-labelledby', action.name + '_label');
-  for (var i = 0, key; key = keys[i]; i++) {
-	select.options.add(new Option(key, key));
-  }
-  actionDiv.appendChild(select);
+    var select = document.createElement('select');
+    select.addEventListener('change', updateKey);
+    select.setAttribute('aria-labelledby', action.name + '_label');
+    for (var i = 0, key; key = keys[i]; i++) {
+        select.options.add(new Option(key, key));
+    }
+    actionDiv.appendChild(select);
 }
 
 /**
@@ -244,12 +246,12 @@ function createDropdown(action, actionDiv, keys) {
  * @package
  */
 function createDropdowns(action, actionKey, actionDiv) {
-  var modifiers = ['None'].concat(Blockly.utils.object.values(Blockly.user.keyMap.modifierKeys));
-  var keys = ['None', 'Enter', 'Escape'].concat("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split(''));
-  createDropdown(action, actionDiv, modifiers);
-  createDropdown(action, actionDiv, modifiers);
-  createDropdown(action, actionDiv, keys);
-  setDropdowns(action, actionDiv, actionKey);
+    var modifiers = ['None'].concat(Blockly.utils.object.values(Blockly.user.keyMap.modifierKeys));
+    var keys = ['None', 'Enter', 'Escape'].concat("ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".split(''));
+    createDropdown(action, actionDiv, modifiers);
+    createDropdown(action, actionDiv, modifiers);
+    createDropdown(action, actionDiv, keys);
+    setDropdowns(action, actionDiv, actionKey);
 }
 
 /**
@@ -259,22 +261,22 @@ function createDropdowns(action, actionKey, actionDiv) {
  * @package
  */
 function createKeyMappingList(actions) {
-  // Update the key map to reflect the key map saved in session storage.
-  restoreKeyMap();
-  var keyMapDiv = document.getElementById('keyboard_mappings');
-  for (var i = 0, action; action = actions[i]; i++) {
-	var actionDiv = document.createElement('div');
-	actionDiv.setAttribute('data-actionname', action.name);
-	actionDiv.action = action;
+    // Update the key map to reflect the key map saved in session storage.
+    restoreKeyMap();
+    var keyMapDiv = document.getElementById('keyboard_mappings');
+    for (var i = 0, action; action = actions[i]; i++) {
+        var actionDiv = document.createElement('div');
+        actionDiv.setAttribute('data-actionname', action.name);
+        actionDiv.action = action;
 
-	var labelDiv = document.createElement('label');
-	labelDiv.innerText = action.name;
-	labelDiv.setAttribute('id', action.name + '_label');
+        var labelDiv = document.createElement('label');
+        labelDiv.innerText = action.name;
+        labelDiv.setAttribute('id', action.name + '_label');
 
-	actionDiv.appendChild(labelDiv);
-	keyMapDiv.appendChild(actionDiv);
+        actionDiv.appendChild(labelDiv);
+        keyMapDiv.appendChild(actionDiv);
 
-	var actionKey = Blockly.user.keyMap.getKeyByAction(action);
-	createDropdowns(action, actionKey, actionDiv);
-  }
+        var actionKey = Blockly.user.keyMap.getKeyByAction(action);
+        createDropdowns(action, actionKey, actionDiv);
+    }
 }
