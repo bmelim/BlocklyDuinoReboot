@@ -14,8 +14,8 @@ BlocklyDuino.openKeyMappingModal = function () {
             effect: "explode",
             duration: 1000
         },
-        width: 440,
-        height: 450,
+        width: 926,
+        height: 445
     });
     if (!dialogKeyMap.dialog("isOpen")) {
         dialogKeyMap.dialog("open").dialog("option", "buttons");

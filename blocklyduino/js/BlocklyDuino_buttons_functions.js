@@ -21,6 +21,7 @@
 /**
  * @fileoverview JavaScript for BlocklyDuino.
  * @author gasolin@gmail.com (Gasolin)
+ * @author scanet@libreduc.cc (Sébastien Canet)
  * 
  */
 'use strict';
@@ -32,7 +33,7 @@ BlocklyDuino.uploadClick = function () {
     var code = Blockly.Arduino.workspaceToCode();
     alert("Ready to upload to Arduino.");
     BlocklyDuino.uploadCode(code, function (status, errorInfo) {
-        if (status == 200) {
+        if (status === 200) {
             alert("Program uploaded ok");
         } else {
             alert("Error uploading program: " + errorInfo);
@@ -55,7 +56,7 @@ BlocklyDuino.uploadCode = function (code, callback) {
     var async = true;
     var request = new XMLHttpRequest();
     request.onreadystatechange = function () {
-        if (request.readyState != 4) {
+        if (request.readyState !== 4) {
             return;
         }
         spinner.stop();
@@ -95,7 +96,7 @@ BlocklyDuino.resetClick = function () {
     var code = "void setup() {} void loop() {}";
 
     uploadCode(code, function (status, errorInfo) {
-        if (status != 200) {
+        if (status !== 200) {
             alert("Error resetting program: " + errorInfo);
         }
     });
@@ -105,7 +106,7 @@ BlocklyDuino.resetClick = function () {
  * Save Arduino generated code to local file.
  */
 BlocklyDuino.saveCode = function () {
-    var fileName = window.prompt('What would you like to name your file?', 'BlocklyDuino')
+    var fileName = window.prompt('What would you like to name your file?', 'BlocklyDuino');
     //doesn't save if the user quits the save prompt
     if (fileName) {
         var blob = new Blob([Blockly.Arduino.workspaceToCode()], {type: 'text/plain;charset=utf-8'});
@@ -120,12 +121,22 @@ BlocklyDuino.saveCode = function () {
  */
 BlocklyDuino.saveXML = function () {
     var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-    var data = Blockly.Xml.domToText(xml);
+    var data = Blockly.Xml.domToPrettyText(xml);
     var fileName = window.prompt('What would you like to name your file?', 'BlocklyDuino');
     if (fileName) {
         var blob = new Blob([data], {type: 'text/xml'});
         saveAs(blob, fileName + ".blocklyduino");
     }
+};
+
+/**
+ * Backup code blocks to localStorage.
+ */
+function backup_blocks() {
+  if ('localStorage' in window) {
+    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    window.localStorage.setItem('arduino', Blockly.Xml.domToText(xml));
+  }
 };
 
 /**
@@ -148,10 +159,10 @@ BlocklyDuino.auto_save_and_restore_blocks = function () {
     window.setTimeout(BlocklyDuino.restore_blocks, 0);
     // Hook a save function onto unload.
     bindEvent(window, 'unload', backup_blocks);
-    tabClick(selected);
+    BlocklyDuino.tabClick(BlocklyDuino.selectedTab);
 
     // Init load event.
-    var loadInput = document.getElementById('loadXMLbutton');
+    var loadInput = document.getElementById('loadXMLfile');
     loadInput.addEventListener('change', loadXMLfunction, false);
     document.getElementById('loadXMLfakeButton').onclick = function () {
         loadInput.click();
@@ -181,7 +192,7 @@ function bindEvent(element, name, func) {
 function loadXMLfunction(event) {
     var files = event.target.files;
     // Only allow uploading one file.
-    if (files.length != 1) {
+    if (files.length !== 1) {
         return;
     }
 
@@ -190,7 +201,7 @@ function loadXMLfunction(event) {
     reader.onloadend = function (event) {
         var target = event.target;
         // 2 == FileReader.DONE
-        if (target.readyState == 2) {
+        if (target.readyState === 2) {
             try {
                 var xml = Blockly.Xml.textToDom(target.result);
             } catch (e) {
@@ -205,7 +216,7 @@ function loadXMLfunction(event) {
         }
         // Reset value of input after loading because Chrome will not fire
         // a 'change' event if the same file is loaded again.
-        document.getElementById('loadXMLaction').value = '';
+        document.getElementById('loadXMLfile').value = '';
     };
     reader.readAsText(files[0]);
 };

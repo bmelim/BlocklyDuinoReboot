@@ -25,7 +25,7 @@
  */
 'use strict';
 
-// goog.provide('Blockly.Arduino');
+goog.provide('Blockly.Arduino');
 
 goog.require('Blockly.Generator');
 
@@ -33,6 +33,8 @@ goog.require('Blockly.Generator');
  * Arduino Board profiles
  *
  */
+
+// BlocklyDuino.selectedTabCard = 'none';
 
 var profile = {
     none: {
@@ -305,4 +307,35 @@ var profile = {
 };
 
 //set default profile to arduino standard-compatible board
-profile["default"] = profile["arduino_uno"];
+profile["default"] = profile["none"];
+
+BlocklyDuino.changeBoard = function () {
+    // Store the blocks for the duration of the reload.
+    // MSIE 11 does not support sessionStorage on file:// URLs.
+    if (window.sessionStorage) {
+        var xml = Blockly.Xml.workspaceToDom(BlocklyDuino.workspace);
+        var text = Blockly.Xml.domToText(xml);
+        window.sessionStorage.loadOnceBlocks = text;
+    }
+
+    var boardMenu = document.getElementById('boardMenu');
+    var newBoard = encodeURIComponent(boardMenu.options[boardMenu.selectedIndex].value);
+    var search = window.location.search;
+    if (search.length <= 1) {
+        search = '?board=' + newBoard;
+    } else if (search.match(/[?&]board=[^&]*/)) {
+        search = search.replace(/([?&]board=)[^&]*/, '$1' + newBoard);
+    } else {
+        search = search.replace(/\?/, '?board=' + newBoard + '&');
+    }
+	
+    profile["default"] = profile[newBoard];
+    window.location = window.location.protocol + '//' +
+            window.location.host + window.location.pathname + search;
+    
+//    var boardId = BlocklyDuino.getStringParamFromUrl('board', '');
+//    if (!boardId) {
+//        boardId = BlocklyDuino.selectedTabCard;
+//    }
+//    $("#boardMenu").val(boardId);
+}
