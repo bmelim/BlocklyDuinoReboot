@@ -322,9 +322,9 @@ BlocklyDuino.renderContent = function () {
 // It is needed for correct pretification of code like #include <SoftwareSerial.h>
 function htmlEscape(s) {
     return s
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;');
 }
 
 /**
@@ -557,6 +557,18 @@ BlocklyDuino.initLanguage = function () {
     document.getElementById('saveCodeButton_span').textContent = MSG['saveCodeButton_span'];
     document.getElementById('saveXMLButton_span').textContent = MSG['saveXMLButton_span'];
     document.getElementById('loadXMLfakeButton_span').textContent = MSG['loadXMLfakeButton_span'];
+	
+    document.getElementById('accessibilitySpan').textContent = MSG['accessibilitySpan'];
+    document.getElementById('defaultCursorSpan').textContent = MSG['defaultCursorSpan'];
+    document.getElementById('basicCursorSpan').textContent = MSG['basicCursorSpan'];
+    document.getElementById('keyMappingSpan').textContent = MSG['keyMappingSpan'];
+    document.getElementById('themeClassicSpan').textContent = MSG['themeClassicSpan'];
+    document.getElementById('themeModernSpan').textContent = MSG['themeModernSpan'];
+    document.getElementById('themeHighContrastSpan').textContent = MSG['themeHighContrastSpan'];
+    document.getElementById('themeDarkSpan').textContent = MSG['themeDarkSpan'];
+    document.getElementById('themeBwSpan').textContent = MSG['themeBwSpan'];
+    document.getElementById('keyMappingSetSpan').textContent = MSG['keyMappingSetSpan'];
+    document.getElementById('accessibilityExplanationSpan').innerHTML = MSG['accessibilityExplanationSpan'];
 };
 
 /**

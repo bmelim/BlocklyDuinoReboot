@@ -70,14 +70,14 @@
                     </h1>
                 </td>
                 <td>
-                    <label for="accessibilityModeCheck">Enable Accessibility Mode:</label>
+                    <label for="accessibilityModeCheck"><span id="accessibilitySpan"></span></label>
                     <input type="checkbox" onclick="toggleAccessibilityMode(this.checked)" id="accessibilityModeCheck">
                     <br />
                     <select id="cursorChanger" name="cursor" onchange="changeCursor(this.value)">
-                        <option value="default">Default Cursor</option>
-                        <option value="basic">Basic Cursor</option>
+                         <option value="default" id="defaultCursorSpan"></option> 
+                         <option value="basic" id="basicCursorSpan"></option> 
                     </select>
-                    <button type="button" id="openKeyMapping">Open Key Mappings</button>
+                    <button type="button" id="openKeyMapping"><span id="keyMappingSpan"></span></button>
                 </td>
                 <td>
                     <span id="languageSpan">...</span>
@@ -85,11 +85,11 @@
                     <br />
                     <span id="themeSpan">...</span>
                     <select id="themeMenu">
-                        <option value="Classic">Classic</option>
-                        <option value="Modern">Modern</option>
-                        <option value="HighContrast">High Contrast</option>
-                        <option value="Dark">Dark</option>
-                        <option value="blackWhite">Black & White</option>
+                        <option value="Classic" id="themeClassicSpan"></option>
+                        <option value="Modern" id="themeModernSpan"></option>
+                        <option value="HighContrast" id="themeHighContrastSpan"></option>
+                        <option value="Dark" id="themeDarkSpan"></option>
+                        <option value="blackWhite" id="themeBwSpan"></option>
                     </select>
                 </td>
             </tr>
@@ -154,11 +154,11 @@
                 <tbody>
                     <tr>
                         <td style="width: 50%;">
-                            You can enter accessibility mode by <b>shift clicking anywhere on the workspace or on a block</b>. <br /><br /><b>Workspace Navigation</b><br />W: Previous block/field/input at the same level<br />A: Up one level (Field (or input) -&gt; Block -&gt; Input (or field) -&gt; Block -&gt; Stack -&gt; Workspace)<br />S: Next block/field/input at the same level<br />D: Down one level (Workspace -&gt; Stack -&gt; Block -&gt; Input (or field) -&gt; Block -&gt; Field (or input))<br />T: Will open the toolbox. Once in there you can moving around using the WASD keys. And insert a block by hitting Enter<br />X: While on a connection hit X to disconnect the block after the cursor<br /><br /><b>Cursor</b><br /><b>Default Cursor:</b> Allow the user to go to the previous, next, in or out location.<br /><b>Basic Cursor:</b> Using the pre order traversal allows the user to go to the next and previous location.</td>
+                            <span id="accessibilityExplanationSpan">...</span>
                         </td>
                         <td style="width: 50%;">
                             <div id="keyboard_nav" style="display">
-                                <p id="keyboard_announce" aria-live="assertive">Set key mappings below</p>
+                                <p id="keyboard_announce" aria-live="assertive"><span id="keyMappingSetSpan">...</span></p>
                                 <form id="keyboard_mappings"></form>
                             </div>
                         </td>
