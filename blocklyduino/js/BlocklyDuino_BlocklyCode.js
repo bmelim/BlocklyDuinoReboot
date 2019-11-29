@@ -81,8 +81,7 @@ BlocklyDuino.changeTheme = function () {
         Blockly.getMainWorkspace().setTheme(Blockly.Themes.Classic);
     }
 
-    window.location = window.location.protocol + '//' +
-            window.location.host + window.location.pathname + search;
+    //window.location = window.location.protocol + '//' + window.location.host + window.location.pathname + search;
 };
 
 /**
@@ -379,6 +378,15 @@ BlocklyDuino.init = function () {
     BlocklyDuino.initLanguage();
     // accessibility
     BlocklyDuino.initKeyMap();
+    // board menu as  URL choice
+    var boardId = BlocklyDuino.getStringParamFromUrl('board', '');
+    if (!boardId) {
+        boardId = BlocklyDuino.selectedTabCard;
+    }
+    $("#boardMenu").val(boardId);
+    profile.default = profile[boardId];
+    
+    console.log(profile.default);
     var rtl = BlocklyDuino.isRtl();
     var container = document.getElementById('content_area');
     var onresize = function (e) {
@@ -448,10 +456,10 @@ BlocklyDuino.init = function () {
                         }
             }
     );
+
     BlocklyDuino.auto_save_and_restore_blocks();
 
     BlocklyDuino.loadBlocks('');
-    // BlocklyDuino.changeBoard();
 
     if ('BlocklyStorage' in window) {
         // Hook a save function onto unload.

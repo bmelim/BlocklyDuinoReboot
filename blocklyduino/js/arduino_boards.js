@@ -25,16 +25,12 @@
  */
 'use strict';
 
-goog.provide('Blockly.Arduino');
-
-goog.require('Blockly.Generator');
+goog.provide('Blockly.Arduino_boards');
 
 /*
  * Arduino Board profiles
  *
  */
-
-// BlocklyDuino.selectedTabCard = 'none';
 
 var profile = {
     none: {
@@ -55,7 +51,7 @@ var profile = {
         miniPicture_hor: "media/boards/Arduino_none_mini_hor.jpg",
         serial: [],
         serialPin: [],
-        upload_arg: "none",
+        upload_arg: "none"
     },
     arduino_leonardo: {
         description: "Arduino Leonardo",
@@ -80,14 +76,16 @@ var profile = {
             ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
             ['115200', '115200']],
         serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-        upload_arg: "arduino:avr:leonardo",
+        upload_arg: "arduino:avr:leonardo"
     },
     arduino_mega: {
         description: "Arduino Mega 2560 / ADK",
         cpu: "atmega2560",
         speed: "115200",
         digital: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52"],
-        dropdownDigital: "attention",
+        dropdownDigital: [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"], ["13", "13"], ["14", "14"], ["15", "15"], ["16", "16"], ["17", "17"], ["18", "18"], ["19", "19"], ["20", "20"],
+            ["21", "21"], ["22", "22"], ["23", "23"], ["24", "24"], ["25", "25"], ["26", "26"], ["27", "27"], ["28", "28"], ["29", "29"], ["30", "30"], ["31", "31"], ["32", "32"], ["33", "33"], ["34", "34"], ["35", "35"], ["36", "36"], ["37", "37"], ["38", "38"], ["39", "39"], ["40", "40"],
+            ["41", "41"], ["42", "42"], ["43", "43"], ["44", "44"], ["45", "45"], ["46", "46"]],
         PWM: ["2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "44", "45", "46"],
         dropdownPWM: [["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"], ["13", "13"], ["44", "44"], ["45", "45"], ["46", "46"]],
         analog: ["A0", "A1", "A2", "A3", "A4", "A5", "A6", "A7", "A8", "A9", "A10", "A11", "A12", "A13", "A14", "A15"],
@@ -105,7 +103,7 @@ var profile = {
             ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
             ['115200', '115200']],
         serialPin: [["0 (Rx) ; 1 (Tx)", "0"], ["19 (Rx1) ; 18 (Tx1)", "19"], ["17 (Rx2) ; 16 (Tx2)", "17"], ["15 (Rx3) ; 14 (Tx3)", "15"]],
-        upload_arg: "arduino:avr:mega:cpu=atmega2560",
+        upload_arg: "arduino:avr:mega:cpu=atmega2560"
     },
     arduino_micro: {
         description: "Arduino Micro",
@@ -130,7 +128,7 @@ var profile = {
             ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
             ['115200', '115200']],
         serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-        upload_arg: "arduino:avr:micro",
+        upload_arg: "arduino:avr:micro"
     },
     arduino_mini: {
         description: "Arduino Mini ATmega328",
@@ -154,7 +152,7 @@ var profile = {
             ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
             ['115200', '115200']],
         serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-        upload_arg: "arduino:avr:mini",
+        upload_arg: "arduino:avr:mini"
     },
     arduino_nano: {
         description: "Arduino Nano ATmega328",
@@ -179,7 +177,7 @@ var profile = {
             ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
             ['115200', '115200']],
         serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-        upload_arg: "arduino:avr:nano:cpu=atmega328old",
+        upload_arg: "arduino:avr:nano:cpu=atmega328old"
     },
     arduino_pro8: {
         description: "Arduino Pro Mini 3.3V ATmega328",
@@ -203,7 +201,7 @@ var profile = {
             ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
             ['115200', '115200']],
         serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-        upload_arg: "arduino:avr:pro:cpu=8MHzatmega328",
+        upload_arg: "arduino:avr:pro:cpu=8MHzatmega328"
     },
     arduino_pro16: {
         description: "Arduino Pro Mini 5V ATmega328",
@@ -227,7 +225,7 @@ var profile = {
             ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
             ['115200', '115200']],
         serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-        upload_arg: "arduino:avr:pro:cpu=16MHzatmega328",
+        upload_arg: "arduino:avr:pro:cpu=16MHzatmega328"
     },
     arduino_uno: {
         description: "Arduino Uno",
@@ -252,7 +250,7 @@ var profile = {
             ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
             ['115200', '115200']],
         serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-        upload_arg: "arduino:avr:uno",
+        upload_arg: "arduino:avr:uno"
     },
     arduino_yun: {
         description: "Arduino Yùn",
@@ -277,7 +275,7 @@ var profile = {
             ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
             ['115200', '115200']],
         serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-        upload_arg: "arduino:avr:yun",
+        upload_arg: "arduino:avr:yun"
     },
     lilypad: {
         description: "LilyPad Arduino ATmega328P",
@@ -302,12 +300,12 @@ var profile = {
             ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
             ['115200', '115200']],
         serialPin: [["0 (Rx) ; 1 (Tx)", "0"]],
-        upload_arg: "arduino:avr:lilypad",
+        upload_arg: "arduino:avr:lilypad"
     }
 };
 
-//set default profile to arduino standard-compatible board
-profile["default"] = profile["none"];
+//set default profile
+profile.default = profile["none"];
 
 BlocklyDuino.changeBoard = function () {
     // Store the blocks for the duration of the reload.
@@ -328,14 +326,7 @@ BlocklyDuino.changeBoard = function () {
     } else {
         search = search.replace(/\?/, '?board=' + newBoard + '&');
     }
-	
-    profile["default"] = profile[newBoard];
+    
     window.location = window.location.protocol + '//' +
             window.location.host + window.location.pathname + search;
-    
-//    var boardId = BlocklyDuino.getStringParamFromUrl('board', '');
-//    if (!boardId) {
-//        boardId = BlocklyDuino.selectedTabCard;
-//    }
-//    $("#boardMenu").val(boardId);
-}
+};

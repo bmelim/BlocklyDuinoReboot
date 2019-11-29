@@ -93,13 +93,11 @@ BlocklyDuino.uploadCode = function (code, callback) {
  * Send blank code to Python server to 'clean' Arduino card firmware.
  */
 BlocklyDuino.resetClick = function () {
-    var code = "void setup() {} void loop() {}";
-
-    uploadCode(code, function (status, errorInfo) {
-        if (status !== 200) {
-            alert("Error resetting program: " + errorInfo);
-        }
-    });
+    window.removeEventListener('unload', BlocklyDuino.backupBlocks, false);
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location = window.location.protocol + '//'
+                    + window.location.host + window.location.pathname;
 };
 
 /**
@@ -145,7 +143,7 @@ function backup_blocks() {
 BlocklyDuino.restore_blocks = function () {
     if ('localStorage' in window && window.localStorage.arduino) {
         var xml = Blockly.Xml.textToDom(window.localStorage.arduino);
-        Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+        Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
     }
 };
 
@@ -212,7 +210,7 @@ function loadXMLfunction(event) {
             if (count && confirm('Replace existing blocks?\n"Cancel" will merge.')) {
                 Blockly.mainWorkspace.clear();
             }
-            Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+            Blockly.Xml.domToWorkspace(xml, Blockly.mainWorkspace);
         }
         // Reset value of input after loading because Chrome will not fire
         // a 'change' event if the same file is loaded again.
