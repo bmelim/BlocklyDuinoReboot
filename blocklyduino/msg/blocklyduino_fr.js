@@ -31,6 +31,15 @@ var MSG = {
     themeHighContrastSpan: "contraste élevé",
     themeDarkSpan: "sombre",
     themeBwSpan: "noir et blanc",
-    keyMappingSetSpan: "définir l'attribution des tâches",
-    accessibilityExplanationSpan: "<p>Vous pouvez entrer en mode accessibilit&eacute; en <strong> Shift cliquant n'importe o&ugrave; dans l'espace de travail ou sur un bloc </strong>. <br /> <br /> <strong> Navigation dans l'espace de travail </strong> <br /> W : bloc / champ / entr&eacute;e pr&eacute;c&eacute;dent de m&ecirc;me niveau.<br /> A : niveau sup&eacute;rieur (champ (ou entr&eacute;e) -&gt; bloc -&gt; entr&eacute;e (ou champ) -&gt; bloc -&gt; empilement -&gt; espace de travail).<br /> S : prochain bloc / champ / entr&eacute;e au m&ecirc;me niveau.<br /> D : niveau inf&eacute;rieur (espace de travail) -&gt; pile -&gt; bloc -&gt; entr&eacute;e (ou champ) -&gt; bloc -&gt; champ (ou entr&eacute;e)) <br /> T : ouvre le menu des cat&eacute;gories (bo&icirc;te &agrave; outils). Une fois dedans, vous pouvez vous d&eacute;placer en utilisant les touches WASD. Et ins&eacute;rer un bloc en appuyant sur Entr&eacute;e.<br /> X : lors d&rsquo;une connexion, appuyez sur X pour d&eacute;connecter le bloc apr&egrave;s le curseur.<br /> <br /> <strong> Curseur</strong>s<br /> <strong> Par d&eacute;faut : </strong>autorise l&rsquo;utilisateur &agrave; se rendre &agrave; l&rsquo;emplacement pr&eacute;c&eacute;dent, suivant.<br /><strong>De base : </strong>l&rsquo;utilisation du parcours pr&eacute;d&eacute;fini permet &agrave; l&rsquo;utilisateur de passer &agrave; l'emplacement suivant et pr&eacute;c&eacute;dent.</p>"
+    keyMappingModalSpan: "définir l'attribution des touches",
+    accessibilityExplanationSpan: "<p>Vous pouvez entrer en mode accessibilit&eacute; en <strong> Shift cliquant n'importe o&ugrave; dans l'espace de travail ou sur un bloc </strong>. <br /> <br /> <strong> Navigation dans l'espace de travail </strong> <br /> W : bloc / champ / entr&eacute;e pr&eacute;c&eacute;dent de m&ecirc;me niveau.<br /> A : niveau sup&eacute;rieur (champ (ou entr&eacute;e) -&gt; bloc -&gt; entr&eacute;e (ou champ) -&gt; bloc -&gt; empilement -&gt; espace de travail).<br /> S : prochain bloc / champ / entr&eacute;e au m&ecirc;me niveau.<br /> D : niveau inf&eacute;rieur (espace de travail) -&gt; pile -&gt; bloc -&gt; entr&eacute;e (ou champ) -&gt; bloc -&gt; champ (ou entr&eacute;e)) <br /> T : ouvre le menu des cat&eacute;gories (bo&icirc;te &agrave; outils). Une fois dedans, vous pouvez vous d&eacute;placer en utilisant les touches WASD. Et ins&eacute;rer un bloc en appuyant sur Entr&eacute;e.<br /> X : lors d&rsquo;une connexion, appuyez sur X pour d&eacute;connecter le bloc apr&egrave;s le curseur.<br /> <br /> <strong> Curseur</strong>s<br /> <strong> Par d&eacute;faut : </strong>autorise l&rsquo;utilisateur &agrave; se rendre &agrave; l&rsquo;emplacement pr&eacute;c&eacute;dent, suivant.<br /><strong>De base : </strong>l&rsquo;utilisation du parcours pr&eacute;d&eacute;fini permet &agrave; l&rsquo;utilisateur de passer &agrave; l'emplacement suivant et pr&eacute;c&eacute;dent.</p>",
+    actionName0: "précédent",
+    actionName1: "supérieur",
+    actionName2: "suivant",
+    actionName3: "inférieur",
+    actionName4: "insérer",
+    actionName5: "marquer",
+    actionName6: "détacher",
+    actionName7: "blocs",
+    actionName8: "sortie"
 };

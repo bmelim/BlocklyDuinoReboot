@@ -4,6 +4,21 @@
  * @package
  */
 BlocklyDuino.openKeyMappingModal = function () {
+    //translation of key assignement name
+    var actions = [
+        Blockly.navigation.ACTION_PREVIOUS,
+        Blockly.navigation.ACTION_OUT,
+        Blockly.navigation.ACTION_NEXT,
+        Blockly.navigation.ACTION_IN,
+        Blockly.navigation.ACTION_INSERT,
+        Blockly.navigation.ACTION_MARK,
+        Blockly.navigation.ACTION_DISCONNECT,
+        Blockly.navigation.ACTION_TOOLBOX,
+        Blockly.navigation.ACTION_EXIT
+    ];
+    for (var i = 0, action; action = actions[i]; i++) {
+        document.getElementById(action.name + '_label').innerText = MSG['actionName' + i];
+    };
     var dialogKeyMap = $("#keyMappingModal").dialog({
         autoOpen: false,
         show: {
@@ -19,8 +34,7 @@ BlocklyDuino.openKeyMappingModal = function () {
     });
     if (!dialogKeyMap.dialog("isOpen")) {
         dialogKeyMap.dialog("open").dialog("option", "buttons");
-    }
-    ;
+    };
 };
 
 BlocklyDuino.initKeyMap = function () {

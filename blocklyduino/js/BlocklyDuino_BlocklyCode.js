@@ -386,7 +386,6 @@ BlocklyDuino.init = function () {
     $("#boardMenu").val(boardId);
     profile.default = profile[boardId];
     
-    console.log(profile.default);
     var rtl = BlocklyDuino.isRtl();
     var container = document.getElementById('content_area');
     var onresize = function (e) {
@@ -575,8 +574,8 @@ BlocklyDuino.initLanguage = function () {
     document.getElementById('themeHighContrastSpan').textContent = MSG['themeHighContrastSpan'];
     document.getElementById('themeDarkSpan').textContent = MSG['themeDarkSpan'];
     document.getElementById('themeBwSpan').textContent = MSG['themeBwSpan'];
-    document.getElementById('keyMappingSetSpan').textContent = MSG['keyMappingSetSpan'];
     document.getElementById('accessibilityExplanationSpan').innerHTML = MSG['accessibilityExplanationSpan'];
+    document.getElementById('keyMappingModal').title = MSG['keyMappingModalSpan'];
 };
 
 /**

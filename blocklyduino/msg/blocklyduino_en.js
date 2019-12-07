@@ -31,6 +31,15 @@ var MSG = {
     themeHighContrastSpan: "High Contrast",
     themeDarkSpan: "Dark",
     themeBwSpan: "Black & White",
-    keyMappingSetSpan: "Set key mappings below",
-    accessibilityExplanationSpan: "You can enter accessibility mode by <b>shift clicking anywhere on the workspace or on a block</b>. <br /><br /><b>Workspace Navigation</b><br />W: Previous block/field/input at the same level<br />A: Up one level (Field (or input) -&gt; Block -&gt; Input (or field) -&gt; Block -&gt; Stack -&gt; Workspace)<br />S: Next block/field/input at the same level<br />D: Down one level (Workspace -&gt; Stack -&gt; Block -&gt; Input (or field) -&gt; Block -&gt; Field (or input))<br />T: Will open the toolbox. Once in there you can moving around using the WASD keys. And insert a block by hitting Enter<br />X: While on a connection hit X to disconnect the block after the cursor<br /><br /><b>Cursor</b><br /><b>Default Cursor:</b> Allow the user to go to the previous, next, in or out location.<br /><b>Basic Cursor:</b> Using the pre order traversal allows the user to go to the next and previous location.</td>"
+    keyMappingModalSpan: "Set key mappings",
+    accessibilityExplanationSpan: "You can enter accessibility mode by <b>shift clicking anywhere on the workspace or on a block</b>. <br /><br /><b>Workspace Navigation</b><br />W: Previous block/field/input at the same level<br />A: Up one level (Field (or input) -&gt; Block -&gt; Input (or field) -&gt; Block -&gt; Stack -&gt; Workspace)<br />S: Next block/field/input at the same level<br />D: Down one level (Workspace -&gt; Stack -&gt; Block -&gt; Input (or field) -&gt; Block -&gt; Field (or input))<br />T: Will open the toolbox. Once in there you can moving around using the WASD keys. And insert a block by hitting Enter<br />X: While on a connection hit X to disconnect the block after the cursor<br /><br /><b>Cursor</b><br /><b>Default Cursor:</b> Allow the user to go to the previous, next, in or out location.<br /><b>Basic Cursor:</b> Using the pre order traversal allows the user to go to the next and previous location.</td>",
+    actionName0: "previous",
+    actionName1: "out",
+    actionName2: "next",
+    actionName3: "in",
+    actionName4: "insert",
+    actionName5: "mark",
+    actionName6: "disconnect",
+    actionName7: "toolbox",
+    actionName8: "exit"
 };

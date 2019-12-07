@@ -326,7 +326,7 @@ BlocklyDuino.changeBoard = function () {
     } else {
         search = search.replace(/\?/, '?board=' + newBoard + '&');
     }
-    
+
     window.location = window.location.protocol + '//' +
             window.location.host + window.location.pathname + search;
 };

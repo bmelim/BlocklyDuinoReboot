@@ -8,7 +8,8 @@
         <link rel="stylesheet" type="text/css" href="css/prettify.css" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />
         <!-- Blockly basics -->
-        <script type="text/javascript" src="../blockly/blockly_compressed.js"></script>
+        <!--<script type="text/javascript" src="../blockly/blockly_compressed.js"></script>-->
+        <script type="text/javascript" src="../blockly3/blockly_uncompressed.js"></script>
         <script type="text/javascript" src="../blockly/blocks_compressed.js"></script>
         <script type="text/javascript" src="../blockly/closure/goog/base.js"></script>
 
@@ -16,7 +17,6 @@
         <script type="text/javascript" src="js/BlocklyDuino_BlocklyCode.js"></script>
         <script type="text/javascript" src="js/BlocklyDuino_buttons_functions.js"></script>
         <script type="text/javascript" src="js/BlocklyDuino_keyboard_nav.js"></script>
-        <!-- <script type="text/javascript" src="js/BlocklyDuino_variables_dynamic.js"></script> -->
         <script type="text/javascript" src="js/arduino_boards.js"></script>
         <script type="text/javascript" src="js/addon/Blob.js"></script>
         <script type="text/javascript" src="js/addon/FileSaver.min.js"></script>
@@ -148,7 +148,7 @@
         <div id="content_blocks" class="content"></div>
         <pre id="content_arduino" class="content prettyprint lang-cpp linenums prettyprinted"></pre>
         <!--<textarea id="content_xml" class="content" wrap="off"></textarea>-->
-        <div id="keyMappingModal" title="Set key mappings below">
+        <div id="keyMappingModal">
             <table style="width: 100%;">
                 <tbody>
                     <tr>
@@ -157,7 +157,7 @@
                         </td>
                         <td style="width: 50%;">
                             <div id="keyboard_nav" style="display">
-                                <p id="keyboard_announce" aria-live="assertive"><span id="keyMappingSetSpan">...</span></p>
+                                <p id="keyboard_announce" aria-live="assertive"></p>
                                 <form id="keyboard_mappings"></form>
                             </div>
                         </td>
